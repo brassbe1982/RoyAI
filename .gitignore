@@ -1,0 +1,8 @@
+.Rproj.user
+.Rhistory
+.RData
+*.Rproj
+inst/montecarlo/results/raw/
+inst/montecarlo-DE/results/*_raw.rds
+*.tar.gz
+RoyAI.Rcheck/

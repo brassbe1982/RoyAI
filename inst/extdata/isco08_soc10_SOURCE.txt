@@ -1,0 +1,7 @@
+isco08_soc10.csv: ISCO-08 (3-digit) to SOC 2010 (detailed) crosswalk.
+Copied from the R package iscoCrosswalks 1.0.0 (eworx-org; data object isco08_soc10; MIT licence;
+source credited there to IBS, https://ibs.org.pl, following Hardy, Keister and Lewandowski 2018,
+"Educational upgrading, structural change and the task composition of jobs in Europe",
+Economics of Transition 26(2), which build on the BLS ISCO-08 / SOC 2010 crosswalk).
+Retrieved 2026-11-25 from https://raw.githubusercontent.com/cran/iscoCrosswalks/master/data/isco08_soc10.rda
+The official BLS file (ISCO_SOC_Crosswalk.xls, https://www.bls.gov/soc/) can replace it via onet_to_isco2(crosswalk = ...).

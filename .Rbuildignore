@@ -1,0 +1,8 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^DEVELOPER_NOTES\.md$
+^PLUGIN_CONTRACT\.md$
+^README\.md$
+^inst/montecarlo/results/raw$
+^inst/montecarlo-DE/results/.*_raw\.rds$
+^LICENSE\.md$

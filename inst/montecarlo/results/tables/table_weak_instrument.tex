@@ -1,0 +1,43 @@
+\begin{table}[htbp]\centering\small
+\caption{Weak excluded instruments ($\gamma_{z1} = 0.15$, $\gamma_{z2} = 0.10$), $\tau = 0.6$, $n = 2000$.}\label{tab:mc-weakiv}
+\begin{tabular}{lllllll}
+\hline
+Copula & Effect & Estimator & true & bias & rmse & coverage
+\\ \hline
+Clayton & ATE & OLS & 0.500 & -0.109 & 0.113 & 0.053 \\
+Clayton & ATE & Two-step & 0.500 & 0.264 & 0.379 & -- \\
+Clayton & ATE & FIML & 0.500 & 0.003 & 0.072 & 0.953 \\
+Clayton & ATT & OLS & 1.471 & -1.093 & 1.093 & 0.000 \\
+Clayton & ATT & Two-step & 1.471 & 0.143 & 0.378 & -- \\
+Clayton & ATT & FIML & 1.471 & -0.002 & 0.076 & 0.960 \\
+Clayton & ATU & OLS & -0.918 & 1.329 & 1.330 & 0.000 \\
+Clayton & ATU & Two-step & -0.918 & 0.440 & 0.593 & -- \\
+Clayton & ATU & FIML & -0.918 & 0.011 & 0.109 & 0.953 \\
+Clayton & LATE & OLS & 0.397 & -- & -- & -- \\
+Clayton & LATE & Two-step & 0.397 & 0.058 & 0.287 & -- \\
+Clayton & LATE & FIML & 0.397 & 0.002 & 0.079 & 0.943 \\
+Gaussian & ATE & OLS & 0.500 & -0.095 & 0.100 & 0.157 \\
+Gaussian & ATE & Two-step & 0.500 & -0.005 & 0.269 & -- \\
+Gaussian & ATE & FIML & 0.500 & -0.003 & 0.096 & 0.960 \\
+Gaussian & ATT & OLS & 1.438 & -1.044 & 1.045 & 0.000 \\
+Gaussian & ATT & Two-step & 1.438 & -0.060 & 0.342 & -- \\
+Gaussian & ATT & FIML & 1.438 & -0.009 & 0.131 & 0.963 \\
+Gaussian & ATU & OLS & -0.870 & 1.291 & 1.291 & 0.000 \\
+Gaussian & ATU & Two-step & -0.870 & 0.077 & 0.413 & -- \\
+Gaussian & ATU & FIML & -0.870 & 0.007 & 0.120 & 0.960 \\
+Gaussian & LATE & OLS & 0.160 & -- & -- & -- \\
+Gaussian & LATE & Two-step & 0.160 & 0.016 & 0.278 & -- \\
+Gaussian & LATE & FIML & 0.160 & 0.001 & 0.091 & 0.953 \\
+Gumbel & ATE & OLS & 0.500 & -0.089 & 0.095 & 0.210 \\
+Gumbel & ATE & Two-step & 0.500 & -0.142 & 0.305 & -- \\
+Gumbel & ATE & FIML & 0.500 & 0.003 & 0.124 & 0.940 \\
+Gumbel & ATT & OLS & 1.409 & -1.007 & 1.008 & 0.000 \\
+Gumbel & ATT & Two-step & 1.409 & -0.170 & 0.402 & -- \\
+Gumbel & ATT & FIML & 1.409 & -0.010 & 0.141 & 0.940 \\
+Gumbel & ATU & OLS & -0.828 & 1.253 & 1.253 & 0.000 \\
+Gumbel & ATU & Two-step & -0.828 & -0.106 & 0.463 & -- \\
+Gumbel & ATU & FIML & -0.828 & 0.020 & 0.208 & 0.937 \\
+Gumbel & LATE & OLS & 0.055 & -- & -- & -- \\
+Gumbel & LATE & Two-step & 0.055 & -0.020 & 0.288 & -- \\
+Gumbel & LATE & FIML & 0.055 & 0.009 & 0.140 & 0.947 \\
+\hline\end{tabular}\end{table}

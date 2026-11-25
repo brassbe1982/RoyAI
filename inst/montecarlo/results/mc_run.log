@@ -1,0 +1,34 @@
+=== main_n2000 21:58:28
+main_gaussian_tau0.6_n2000 done: R=500, 205 s, 0 failed
+main_t_tau0.6_n2000 done: R=250, 687 s, 0 failed
+main_clayton_tau0.6_n2000 done: R=500, 171 s, 0 failed
+main_gumbel_tau0.6_n2000 done: R=500, 214 s, 0 failed
+main_frank_tau0.6_n2000 done: R=500, 170 s, 0 failed
+main_gaussian_tau0.3_n2000 done: R=500, 193 s, 0 failed
+main_t_tau0.3_n2000 done: R=250, 682 s, 0 failed
+main_clayton_tau0.3_n2000 done: R=500, 179 s, 0 failed
+main_gumbel_tau0.3_n2000 done: R=500, 209 s, 0 failed
+main_frank_tau0.3_n2000 done: R=500, 166 s, 0 failed
+main_gaussian_tau0.0_n2000 done: R=500, 186 s, 0 failed
+main_t_tau0.0_n2000 done: R=250, 662 s, 0 failed
+main_clayton_tau0.0_n2000 done: R=500, 157 s, 0 failed
+main_gumbel_tau0.0_n2000 done: R=500, 207 s, 0 failed
+main_frank_tau0.0_n2000 done: R=500, 155 s, 0 failed
+=== main_n500 23:09:11
+main_gaussian_tau0.6_n500 done: R=500, 105 s, 0 failed
+main_t_tau0.6_n500 done: R=250, 400 s, 0 failed
+main_clayton_tau0.6_n500 done: R=500, 93 s, 0 failed
+main_gumbel_tau0.6_n500 done: R=500, 113 s, 0 failed
+main_frank_tau0.6_n500 done: R=500, 97 s, 0 failed
+main_gaussian_tau0.3_n500 done: R=500, 118 s, 0 failed
+main_t_tau0.3_n500 done: R=250, 445 s, 0 failed
+main_clayton_tau0.3_n500 done: R=500, 95 s, 0 failed
+main_gumbel_tau0.3_n500 done: R=500, 118 s, 0 failed
+main_frank_tau0.3_n500 done: R=500, 98 s, 0 failed
+main_gaussian_tau0.0_n500 done: R=500, 113 s, 0 failed
+main_t_tau0.0_n500 done: R=250, 394 s, 0 failed
+main_clayton_tau0.0_n500 done: R=500, 86 s, 0 failed
+main_gumbel_tau0.0_n500 done: R=500, 101 s, 0 failed
+main_frank_tau0.0_n500 done: R=500, 79 s, 0 failed
+=== misspec 23:50:07
+misspec_gaussian_tau0.6_n2000 done: R=100, 141 s, 0 failed

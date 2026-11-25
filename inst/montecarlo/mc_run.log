@@ -1,0 +1,152 @@
+=== main_n2000 21:58:28
+main_gaussian_tau0.6_n2000 done: R=500, 205 s, 0 failed
+main_t_tau0.6_n2000 done: R=250, 687 s, 0 failed
+main_clayton_tau0.6_n2000 done: R=500, 171 s, 0 failed
+main_gumbel_tau0.6_n2000 done: R=500, 214 s, 0 failed
+main_frank_tau0.6_n2000 done: R=500, 170 s, 0 failed
+main_gaussian_tau0.3_n2000 done: R=500, 193 s, 0 failed
+main_t_tau0.3_n2000 done: R=250, 682 s, 0 failed
+main_clayton_tau0.3_n2000 done: R=500, 179 s, 0 failed
+main_gumbel_tau0.3_n2000 done: R=500, 209 s, 0 failed
+main_frank_tau0.3_n2000 done: R=500, 166 s, 0 failed
+main_gaussian_tau0.0_n2000 done: R=500, 186 s, 0 failed
+main_t_tau0.0_n2000 done: R=250, 662 s, 0 failed
+main_clayton_tau0.0_n2000 done: R=500, 157 s, 0 failed
+main_gumbel_tau0.0_n2000 done: R=500, 207 s, 0 failed
+main_frank_tau0.0_n2000 done: R=500, 155 s, 0 failed
+=== main_n500 23:09:11
+main_gaussian_tau0.6_n500 done: R=500, 105 s, 0 failed
+main_t_tau0.6_n500 done: R=250, 400 s, 0 failed
+main_clayton_tau0.6_n500 done: R=500, 93 s, 0 failed
+main_gumbel_tau0.6_n500 done: R=500, 113 s, 0 failed
+main_frank_tau0.6_n500 done: R=500, 97 s, 0 failed
+main_gaussian_tau0.3_n500 done: R=500, 118 s, 0 failed
+main_t_tau0.3_n500 done: R=250, 445 s, 0 failed
+main_clayton_tau0.3_n500 done: R=500, 95 s, 0 failed
+main_gumbel_tau0.3_n500 done: R=500, 118 s, 0 failed
+main_frank_tau0.3_n500 done: R=500, 98 s, 0 failed
+main_gaussian_tau0.0_n500 done: R=500, 113 s, 0 failed
+main_t_tau0.0_n500 done: R=250, 394 s, 0 failed
+main_clayton_tau0.0_n500 done: R=500, 86 s, 0 failed
+main_gumbel_tau0.0_n500 done: R=500, 101 s, 0 failed
+main_frank_tau0.0_n500 done: R=500, 79 s, 0 failed
+=== misspec 23:50:07
+misspec_gaussian_tau0.6_n2000 done: R=100, 141 s, 0 failed
+=== restart after container restart 23:58
+=== main_n2000 23:58:16
+skip main_gaussian_tau0.6_n2000
+skip main_t_tau0.6_n2000
+skip main_clayton_tau0.6_n2000
+skip main_gumbel_tau0.6_n2000
+skip main_frank_tau0.6_n2000
+skip main_gaussian_tau0.3_n2000
+skip main_t_tau0.3_n2000
+skip main_clayton_tau0.3_n2000
+skip main_gumbel_tau0.3_n2000
+skip main_frank_tau0.3_n2000
+skip main_gaussian_tau0.0_n2000
+skip main_t_tau0.0_n2000
+skip main_clayton_tau0.0_n2000
+skip main_gumbel_tau0.0_n2000
+skip main_frank_tau0.0_n2000
+=== main_n500 23:58:18
+skip main_gaussian_tau0.6_n500
+skip main_t_tau0.6_n500
+skip main_clayton_tau0.6_n500
+skip main_gumbel_tau0.6_n500
+skip main_frank_tau0.6_n500
+skip main_gaussian_tau0.3_n500
+skip main_t_tau0.3_n500
+skip main_clayton_tau0.3_n500
+skip main_gumbel_tau0.3_n500
+skip main_frank_tau0.3_n500
+skip main_gaussian_tau0.0_n500
+skip main_t_tau0.0_n500
+skip main_clayton_tau0.0_n500
+skip main_gumbel_tau0.0_n500
+skip main_frank_tau0.0_n500
+=== misspec 23:58:18
+skip misspec_gaussian_tau0.6_n2000
+misspec_t_tau0.6_n2000 done: R=100, 333 s, 0 failed
+misspec_clayton_tau0.6_n2000 done: R=100, 169 s, 0 failed
+misspec_gumbel_tau0.6_n2000 done: R=100, 166 s, 0 failed
+misspec_frank_tau0.6_n2000 done: R=100, 152 s, 0 failed
+misspec_gaussian_tau0.3_n2000 done: R=100, 130 s, 0 failed
+misspec_t_tau0.3_n2000 done: R=100, 305 s, 0 failed
+misspec_clayton_tau0.3_n2000 done: R=100, 144 s, 0 failed
+misspec_gumbel_tau0.3_n2000 done: R=100, 148 s, 0 failed
+misspec_frank_tau0.3_n2000 done: R=100, 141 s, 0 failed
+=== weakiv 00:26:27
+weakiv_gaussian_tau0.6_n2000 done: R=300, 103 s, 0 failed
+weakiv_clayton_tau0.6_n2000 done: R=300, 90 s, 0 failed
+=== restart 2 00:30
+=== main_n2000 00:30:21
+skip main_gaussian_tau0.6_n2000
+skip main_t_tau0.6_n2000
+skip main_clayton_tau0.6_n2000
+skip main_gumbel_tau0.6_n2000
+skip main_frank_tau0.6_n2000
+skip main_gaussian_tau0.3_n2000
+skip main_t_tau0.3_n2000
+skip main_clayton_tau0.3_n2000
+skip main_gumbel_tau0.3_n2000
+skip main_frank_tau0.3_n2000
+skip main_gaussian_tau0.0_n2000
+skip main_t_tau0.0_n2000
+skip main_clayton_tau0.0_n2000
+skip main_gumbel_tau0.0_n2000
+skip main_frank_tau0.0_n2000
+=== main_n500 00:30:24
+skip main_gaussian_tau0.6_n500
+skip main_t_tau0.6_n500
+skip main_clayton_tau0.6_n500
+skip main_gumbel_tau0.6_n500
+skip main_frank_tau0.6_n500
+skip main_gaussian_tau0.3_n500
+skip main_t_tau0.3_n500
+skip main_clayton_tau0.3_n500
+skip main_gumbel_tau0.3_n500
+skip main_frank_tau0.3_n500
+skip main_gaussian_tau0.0_n500
+skip main_t_tau0.0_n500
+skip main_clayton_tau0.0_n500
+skip main_gumbel_tau0.0_n500
+skip main_frank_tau0.0_n500
+=== misspec 00:30:24
+skip misspec_gaussian_tau0.6_n2000
+skip misspec_t_tau0.6_n2000
+skip misspec_clayton_tau0.6_n2000
+skip misspec_gumbel_tau0.6_n2000
+skip misspec_frank_tau0.6_n2000
+skip misspec_gaussian_tau0.3_n2000
+skip misspec_t_tau0.3_n2000
+skip misspec_clayton_tau0.3_n2000
+skip misspec_gumbel_tau0.3_n2000
+skip misspec_frank_tau0.3_n2000
+=== weakiv 00:30:24
+skip weakiv_gaussian_tau0.6_n2000
+skip weakiv_clayton_tau0.6_n2000
+weakiv_gumbel_tau0.6_n2000 done: R=300, 119 s, 0 failed
+=== j3 00:32:24
+j3_gaussian_tau0.6_n3000 done: R=200, 236 s, 0 failed
+j3_t_tau0.6_n3000 done: R=100, 915 s, 0 failed
+j3_clayton_tau0.6_n3000 done: R=200, 212 s, 0 failed
+j3_gumbel_tau0.6_n3000 done: R=200, 274 s, 0 failed
+j3_frank_tau0.6_n3000 done: R=200, 215 s, 0 failed
+=== main_large 01:03:17
+main_gaussian_tau0.6_n10000 done: R=100, 127 s, 0 failed
+main_t_tau0.6_n10000 done: R=50, 416 s, 0 failed
+main_clayton_tau0.6_n10000 done: R=100, 120 s, 0 failed
+main_gumbel_tau0.6_n10000 done: R=100, 153 s, 0 failed
+main_frank_tau0.6_n10000 done: R=100, 112 s, 0 failed
+main_gaussian_tau0.3_n10000 done: R=100, 122 s, 0 failed
+main_t_tau0.3_n10000 done: R=50, 413 s, 0 failed
+main_clayton_tau0.3_n10000 done: R=100, 115 s, 0 failed
+main_gumbel_tau0.3_n10000 done: R=100, 145 s, 0 failed
+main_frank_tau0.3_n10000 done: R=100, 114 s, 0 failed
+main_gaussian_tau0.0_n10000 done: R=100, 112 s, 0 failed
+main_t_tau0.0_n10000 done: R=50, 415 s, 0 failed
+main_clayton_tau0.0_n10000 done: R=100, 113 s, 0 failed
+main_gumbel_tau0.0_n10000 done: R=100, 148 s, 0 failed
+main_frank_tau0.0_n10000 done: R=100, 107 s, 0 failed
+=== ALL DONE 01:48:49
