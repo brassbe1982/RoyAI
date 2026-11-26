@@ -12,9 +12,9 @@ effects.
 
 * Ubuntu 24.04, R 4.3.3: `R CMD check --as-cran` on the tarball built by
   `R CMD build`: Status OK.
-* Windows 11 (maintainer's machine, R 4.6.2): `R CMD check --as-cran` of the
-  development version: 0 errors, 0 warnings, 1 NOTE on "Lost braces" in three
-  Rd files, all fixed in this version. [Replace with the run on 0.3.0.]
+* Windows 11 (maintainer's machine, R 4.6.2 ucrt): `R CMD check --as-cran`
+  on the submitted tarball: Status OK (0 errors, 0 warnings, 0 notes).
+  Complete test suite with `NOT_CRAN = "true"`: 171 expectations, 0 failures.
 * GitHub Actions (`R CMD check --no-manual`, complete test suite with
   `NOT_CRAN = "true"`): Windows, macOS and Ubuntu with R release, devel and
   oldrel-1, <https://github.com/brassbe1982/RoyAI/actions>:
