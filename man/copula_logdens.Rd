@@ -11,14 +11,17 @@ copula_logdens(u, v, cp)
 
 \item{v}{selection uniform(s)}
 
-\item{cp}{copula parameter list from [copula_par()]}
+\item{cp}{copula parameter list from \code{\link[=copula_par]{copula_par()}}}
 }
 \value{
 numeric vector of log-densities
 }
 \description{
 Log of the copula density c(u, v) for the families of
-[roy_copula_families], parameterised by Kendall's tau through
-[copula_par()]. Rotated (negative-tau) Clayton and Gumbel copulas use
-c(1 - u, v), consistent with [copula_hfunc()].
+\link{roy_copula_families}, parameterised by Kendall's tau through
+\code{\link[=copula_par]{copula_par()}}. Rotated (negative-tau) Clayton and Gumbel copulas use
+c(1 - u, v), consistent with \code{\link[=copula_hfunc]{copula_hfunc()}}.
+}
+\examples{
+copula_logdens(c(0.2, 0.7), c(0.3, 0.6), copula_par("gumbel", tau = 0.5))
 }

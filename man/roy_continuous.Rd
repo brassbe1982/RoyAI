@@ -20,55 +20,54 @@ roy_continuous(
 )
 }
 \arguments{
-\item{outcome}{formula `y ~ x1 + ...` for the part of `mu(x, a)` that does
+\item{outcome}{formula \code{y ~ x1 + ...} for the part of \code{mu(x, a)} that does
 not involve intensity (the intercept lives here)}
 
-\item{intensity}{formula `a ~ z1 + ...`: intensity on the left, selection
+\item{intensity}{formula \code{a ~ z1 + ...}: intensity on the left, selection
 regressors (including at least one excluded variable) on the right}
 
 \item{data}{data.frame}
 
 \item{dose}{one-sided formula in the intensity variable for the dose part of
-`mu`, e.g. `~ a + I(a^2)`; intercept is dropped. Default: linear and
-quadratic. Avoid data-dependent bases such as `poly()`.}
+\code{mu}, e.g. \code{~ a + I(a^2)}; intercept is dropped. Default: linear and
+quadratic. Avoid data-dependent bases such as \code{poly()}.}
 
-\item{scale}{one-sided formula for `log sigma(a)`, e.g. `~ a` (default) or
-`~ 1` (homoskedastic)}
+\item{scale}{one-sided formula for \verb{log sigma(a)}, e.g. \code{~ a} (default) or
+\code{~ 1} (homoskedastic)}
 
-\item{family}{copula family, one of [roy_copula_families]}
+\item{family}{copula family, one of \link{roy_copula_families}}
 
-\item{link}{`"exp"` (`Lambda(t) = 1 - exp(-t)`) or `"tanh"`
-(`Lambda(t) = tanh(t/2)`)}
+\item{link}{\code{"exp"} (\code{Lambda(t) = 1 - exp(-t)}) or \code{"tanh"}
+(\code{Lambda(t) = tanh(t/2)})}
 
 \item{fix_nu}{fix the t-copula degrees of freedom (NULL = estimate)}
 
-\item{start}{optional start (unconstrained scale, see `fit$par` names)}
+\item{start}{optional start (unconstrained scale, see \code{fit$par} names)}
 
-\item{multistart}{`NULL` (default) means `TRUE` for non-Gaussian families
-when `start` is not given}
+\item{multistart}{\code{NULL} (default) means \code{TRUE} for non-Gaussian families
+when \code{start} is not given}
 
 \item{score_tol}{largest absolute score accepted at a regular maximum}
 
-\item{control}{passed to [stats::optim()]}
+\item{control}{passed to \code{\link[stats:optim]{stats::optim()}}}
 }
 \value{
-object of class `"roy_continuous"`
+object of class \code{"roy_continuous"}
 }
 \description{
 Maximum-likelihood estimation of the censored-intensity copula Roy model
 of the monograph (Section 5.4, Proposition "Likelihood of Model D").
-Intensity `A` in \[0, 1) is zero for non-users (latent propensity
-`Z'gamma + V <= 0`) and `Lambda(Z'gamma + V)` for users, where `Lambda`
-is a known link. Outcomes are `Y(a) = X'beta_x + D(a)'beta_a +
-sigma(a) eps` with `log sigma(a) = W(a)'alpha` and the copula of
-`(Phi(eps), Phi(V))` given by `family`, parameterised by Kendall's tau.
+Intensity \code{A} in [0, 1) is zero for non-users (latent propensity
+\verb{Z'gamma + V <= 0}) and \verb{Lambda(Z'gamma + V)} for users, where \code{Lambda}
+is a known link. Outcomes are \verb{Y(a) = X'beta_x + D(a)'beta_a + sigma(a) eps} with \verb{log sigma(a) = W(a)'alpha} and the copula of
+\verb{(Phi(eps), Phi(V))} given by \code{family}, parameterised by Kendall's tau.
 }
 \details{
-The same safeguards as [roy_copula_fit()] apply: for non-Gaussian
+The same safeguards as \code{\link[=roy_copula_fit]{roy_copula_fit()}} apply: for non-Gaussian
 families the likelihood is maximised from several starts (two-step
-control function, independence, flipped tau) and the best *regular*
-maximum is kept (positive definite Hessian, max |score| <= `score_tol`,
-|tau| <= 0.98). The runs are stored in `fit$multistart`.
+control function, independence, flipped tau) and the best \emph{regular}
+maximum is kept (positive definite Hessian, max |score| <= \code{score_tol},
+|tau| <= 0.98). The runs are stored in \code{fit$multistart}.
 }
 \examples{
 set.seed(1)
@@ -78,5 +77,5 @@ fit
 roy_continuous_effects(fit, a = 0.5, se = FALSE)
 }
 \references{
-Niankara, I. et al. (2025) <doi:10.1109/GCET68529.2025.11450624>.
+Niankara, I. et al. (2025) \url{doi:10.1109/GCET68529.2025.11450624}.
 }

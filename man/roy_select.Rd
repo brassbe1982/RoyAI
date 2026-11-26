@@ -7,18 +7,24 @@
 roy_select(spec, control = list())
 }
 \arguments{
-\item{spec}{A [roy_spec()] object.}
+\item{spec}{A \code{\link[=roy_spec]{roy_spec()}} object.}
 
-\item{control}{List passed to [stats::optim()] for the multinomial logit.}
+\item{control}{List passed to \code{\link[stats:optim]{stats::optim()}} for the multinomial logit.}
 }
 \value{
-An object of class `roy_selection` with `coef` (vector for Model A,
-  `ncol(Z)` x `(J-1)` matrix for Model B), `vcov`, `prob` (n x J matrix of
-  fitted choice probabilities), `loglik` and `type`.
+An object of class \code{roy_selection} with \code{coef} (vector for Model A,
+\code{ncol(Z)} x \code{(J-1)} matrix for Model B), \code{vcov}, \code{prob} (n x J matrix of
+fitted choice probabilities), \code{loglik} and \code{type}.
 }
 \description{
 Model A uses a probit, \eqn{D = 1(Z'\gamma + U_D > 0)} with
 \eqn{U_D \sim N(0,1)}. Model B uses a multinomial logit,
 \eqn{S = \arg\max_s \{Z'\gamma_s + \varepsilon_s\}} with i.i.d. Gumbel
 \eqn{\varepsilon_s} and \eqn{\gamma_0 = 0} (human-only is the base).
+}
+\examples{
+dat <- roy_sim_A(n = 1000, seed = 1)
+spec <- roy_spec(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+sel <- roy_select(spec)
+sel
 }

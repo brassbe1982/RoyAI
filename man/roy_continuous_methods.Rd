@@ -26,10 +26,21 @@
 \method{print}{summary.roy_continuous}(x, ...)
 }
 \arguments{
-\item{object, x}{a `"roy_continuous"` fit}
+\item{object, x}{a \code{"roy_continuous"} fit}
 
 \item{...}{unused}
 }
+\value{
+\code{coef()} a named numeric vector, \code{vcov()} a matrix, \code{logLik()} an object of class \code{logLik}, \code{nobs()} an integer, \code{summary()} an object of class \code{summary.roy_continuous} (a coefficient table); the \code{print} methods return their argument invisibly.
+}
 \description{
 Methods for Model D fits
+}
+\examples{
+set.seed(1)
+d <- roy_continuous_sim(600, tau = 0.4)
+fit <- roy_continuous(y ~ x1, a ~ x1 + z1 + z2, d, family = "gaussian")
+coef(fit)
+summary(fit)
+logLik(fit); nobs(fit)
 }

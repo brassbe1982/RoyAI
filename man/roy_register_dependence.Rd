@@ -13,19 +13,26 @@ roy_get_dependence(name)
 roy_dependence_families()
 }
 \arguments{
-\item{family}{A [roy_dependence()] object.}
+\item{family}{A \code{\link[=roy_dependence]{roy_dependence()}} object.}
 
 \item{overwrite}{Replace an existing family of the same name?}
 
 \item{name}{Family name to look up.}
 }
 \value{
-`roy_register_dependence()` returns the family invisibly;
-  `roy_get_dependence()` returns the family; `roy_dependence_families()`
-  returns the registered names.
+\code{roy_register_dependence()} returns the family invisibly;
+\code{roy_get_dependence()} returns the family; \code{roy_dependence_families()}
+returns the registered names.
 }
 \description{
-`roy_register_dependence()` adds a family to the package registry so that
-`roy(..., dependence = "name")` can use it. This is how the copula module
+\code{roy_register_dependence()} adds a family to the package registry so that
+\code{roy(..., dependence = "name")} can use it. This is how the copula module
 plugs into the core estimators.
+}
+\examples{
+g <- roy_dep_gaussian()
+g$name <- "gaussian_copy"
+roy_register_dependence(g, overwrite = TRUE)
+"gaussian_copy" \%in\% roy_dependence_families()
+roy_get_dependence("gaussian_copy")
 }

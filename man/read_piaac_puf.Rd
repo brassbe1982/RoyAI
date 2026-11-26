@@ -10,7 +10,7 @@ read_piaac_puf(folder, countries = NULL, columns = NULL)
 \item{folder}{Folder holding the PUF CSV files.}
 
 \item{countries}{Optional ISO3 codes to read (matched against file names),
-e.g. `piaac_analysis_countries()$iso3`.}
+e.g. \code{piaac_analysis_countries()$iso3}.}
 
 \item{columns}{Optional subset of columns to keep.}
 }
@@ -18,9 +18,18 @@ e.g. `piaac_analysis_countries()$iso3`.}
 A data frame.
 }
 \description{
-Reads and stacks the country files `prg<cnt>p2.csv` (semicolon separated,
+Reads and stacks the country files \verb{prg<cnt>p2.csv} (semicolon separated,
 as distributed by the OECD) with base R. All columns are read as character
-so that the PUF missing codes (".n", ".v", ...) survive; [piaac_onet_prep()]
-converts them to `NA`. Columns absent from a country's file (suppressed
-variables) are filled with `NA`.
+so that the PUF missing codes (".n", ".v", ...) survive; \code{\link[=piaac_onet_prep]{piaac_onet_prep()}}
+converts them to \code{NA}. Columns absent from a country's file (suppressed
+variables) are filled with \code{NA}.
+}
+\examples{
+ex <- piaac_example(n = 200)
+dir <- file.path(tempdir(), "puf")
+dir.create(dir, showWarnings = FALSE)
+utils::write.csv2(ex$piaac, file.path(dir, "prgchlp2.csv"), row.names = FALSE)
+puf <- read_piaac_puf(dir, countries = "chl")
+dim(puf)
+unlink(dir, recursive = TRUE)
 }

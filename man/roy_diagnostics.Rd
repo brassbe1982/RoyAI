@@ -7,7 +7,7 @@
 roy_diagnostics(fit, overlap_eps = 0.02, rho_bound = 0.95, kappa_bound = 1000)
 }
 \arguments{
-\item{fit}{A `roy_fit` object.}
+\item{fit}{A \code{roy_fit} object.}
 
 \item{overlap_eps}{Threshold for "near 0 or 1" probabilities.}
 
@@ -17,24 +17,29 @@ roy_diagnostics(fit, overlap_eps = 0.02, rho_bound = 0.95, kappa_bound = 1000)
 flagged as near-collinear.}
 }
 \value{
-An object of class `roy_diagnostics`: a list of the components
-  above plus `flags`, a character vector of warnings in plain language.
+An object of class \code{roy_diagnostics}: a list of the components
+above plus \code{flags}, a character vector of warnings in plain language.
 }
 \description{
 Collects the checks that decide whether a Roy model estimate can be
 trusted:
 \describe{
-  \item{convergence}{optimizer status, largest absolute score, smallest
-    Hessian eigenvalue and its condition number (ML fits).}
-  \item{selection}{Wald test of no selection on unobservables
-    (\eqn{\rho_0 = \rho_1 = 0}, or all correction coefficients zero).}
-  \item{instruments}{likelihood-ratio test that the excluded selection
-    variables (exclusion restrictions) have no effect on selection; a weak
-    result means identification leans on functional form.}
-  \item{overlap}{distribution of fitted regime probabilities and the share
-    of observations with probabilities near 0 or 1 (limited support for
-    counterfactuals and for MTE estimation).}
-  \item{boundary}{dependence parameters close to the edge of the
-    parameter space, and (Model B) near-collinear correction terms.}
+\item{convergence}{optimizer status, largest absolute score, smallest
+Hessian eigenvalue and its condition number (ML fits).}
+\item{selection}{Wald test of no selection on unobservables
+(\eqn{\rho_0 = \rho_1 = 0}, or all correction coefficients zero).}
+\item{instruments}{likelihood-ratio test that the excluded selection
+variables (exclusion restrictions) have no effect on selection; a weak
+result means identification leans on functional form.}
+\item{overlap}{distribution of fitted regime probabilities and the share
+of observations with probabilities near 0 or 1 (limited support for
+counterfactuals and for MTE estimation).}
+\item{boundary}{dependence parameters close to the edge of the
+parameter space, and (Model B) near-collinear correction terms.}
 }
+}
+\examples{
+dat <- roy_sim_A(n = 1500, seed = 1)
+fit <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+roy_diagnostics(fit)
 }

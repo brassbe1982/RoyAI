@@ -68,6 +68,10 @@ frank_tau <- function(theta) {
 #' @param tau Kendall's tau in (-1, 1)
 #' @param nu degrees of freedom (t copula only)
 #' @return list(family, theta, rot, nu, tau)
+#' @examples
+#' cp <- copula_par("clayton", tau = 0.4)
+#' str(cp)
+#' copula_par("t", tau = -0.2, nu = 5)$theta
 #' @export
 copula_par <- function(family, tau, nu = NULL) {
   family <- match.arg(family, roy_copula_families)
@@ -121,6 +125,10 @@ copula_par <- function(family, tau, nu = NULL) {
 #' @param v selection uniform(s)
 #' @param u outcome uniform(s)
 #' @param cp copula parameter list from [copula_par()]
+#' @return A numeric vector of conditional probabilities \eqn{P(V \le v \mid U = u)}.
+#' @examples
+#' cp <- copula_par("frank", tau = 0.3)
+#' copula_hfunc(c(0.2, 0.5, 0.8), u = 0.4, cp = cp)
 #' @export
 copula_hfunc <- function(v, u, cp) {
   if (cp$rot == 90) .h_base(v, 1 - u, cp) else .h_base(v, u, cp)
@@ -130,6 +138,10 @@ copula_hfunc <- function(v, u, cp) {
 #' @param u outcome uniform(s)
 #' @param v selection uniform(s)
 #' @param cp copula parameter list from [copula_par()]
+#' @return A numeric vector of conditional probabilities \eqn{P(U \le u \mid V = v)}.
+#' @examples
+#' cp <- copula_par("gumbel", tau = 0.5)
+#' copula_hfunc2(c(0.2, 0.5, 0.8), v = 0.4, cp = cp)
 #' @export
 copula_hfunc2 <- function(u, v, cp) {
   if (cp$rot == 90) 1 - .h_base(1 - u, v, cp) else .h_base(u, v, cp)
@@ -243,6 +255,12 @@ copula_hfunc2 <- function(u, v, cp) {
 #' @param hessian compute the observed-information covariance matrix
 #' @param control passed to optim()
 #' @return object of class "roy_copula"
+#' @examples
+#' set.seed(2)
+#' d <- roy_copula_sim(1500, list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6),
+#'                     c(0.8, 1), c(-0.4, 0.5), "clayton")
+#' fit <- roy_copula_fit(y ~ x1, s ~ x1 + z1 + z2, d, family = "clayton")
+#' coef(fit)[c("tau0", "tau1")]
 #' @export
 roy_copula_fit <- function(outcome, selection, data,
                            family = c("gaussian", "t", "clayton", "gumbel", "frank"),
@@ -359,6 +377,16 @@ roy_copula_fit <- function(outcome, selection, data,
 #' @param s observed regime (0..J-1)
 #' @param sp model spec list(kx, kz, J, family, fix_nu, type, link)
 #' @return parameter vector on the unconstrained scale (Gaussian layout)
+#' @examples
+#' set.seed(2)
+#' d <- roy_copula_sim(1000, list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6),
+#'                     c(0.8, 1), c(-0.4, 0.5), "gaussian")
+#' X <- cbind(1, d$x1); Z <- cbind(1, d$x1, d$z1, d$z2)
+#' sp <- list(kx = list(k = 2, names = c("(Intercept)", "x1")),
+#'            kz = list(k = 4, names = c("(Intercept)", "x1", "z1", "z2")),
+#'            J = 2, family = "gaussian", fix_nu = NULL, type = "ordered",
+#'            link = "probit")
+#' roy_twostep(d$y, X, Z, d$s, sp)
 #' @export
 roy_twostep <- function(y, X, Z, s, sp) {
   J <- sp$J; F <- .linkfun(sp$link)
@@ -479,6 +507,15 @@ print.summary.roy_copula <- function(x, ...) {
 #' @param families copula families to compare
 #' @param ... passed to [roy_copula_fit()]
 #' @return list(table, fits, best)
+#' @examples
+#' \donttest{
+#' set.seed(2)
+#' d <- roy_copula_sim(1500, list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6),
+#'                     c(0.8, 1), c(-0.4, 0.5), "clayton")
+#' sel <- roy_copula_select(y ~ x1, s ~ x1 + z1 + z2, d,
+#'                          families = c("gaussian", "clayton"))
+#' sel
+#' }
 #' @export
 roy_copula_select <- function(outcome, selection, data,
                               families = roy_copula_families, ...) {
@@ -512,9 +549,16 @@ roy_copula_select <- function(outcome, selection, data,
 #' @param link "probit" or "logit" (ordered model)
 #' @param covariates data.frame of covariates; default x1 ~ N(0,1),
 #'   z1 ~ N(0,1), z2 ~ Bernoulli(0.5).  Columns are taken in order:
-#'   X uses the first length(beta[[1]]) - 1 columns, Z the first nrow(gamma) - 1.
+#'   X uses the first `length(beta[[1]]) - 1` columns, Z the first `nrow(gamma) - 1`.
 #' @return data.frame with y, s (observed regime), potential outcomes
 #'   y0..y{J-1}, selection uniform(s) and covariates
+#' @examples
+#' set.seed(1)
+#' d <- roy_copula_sim(1000, beta = list(c(0.5, 0.3), c(1, 0.5)),
+#'                     gamma = c(0.2, 0.3, 0.8, 0.6), sigma = c(0.8, 1),
+#'                     tau = c(-0.3, 0.4), family = "frank")
+#' table(d$s)
+#' mean(d$y1 - d$y0)
 #' @export
 roy_copula_sim <- function(n, beta, gamma, sigma, tau, family = "gaussian",
                            nu = NULL, kappa = NULL, type = c("ordered", "mnl"),
@@ -569,6 +613,10 @@ roy_copula_sim <- function(n, beta, gamma, sigma, tau, family = "gaussian",
 #' assumes exchangeable copulas, so simulate rotated cases with
 #' [roy_copula_sim()].
 #' @return named list of roy_dependence objects
+#' @examples
+#' deps <- roy_copula_dependence()
+#' names(deps)
+#' deps$clayton
 #' @export
 roy_copula_dependence <- function() {
   mk <- function(fam) {
@@ -591,6 +639,10 @@ roy_copula_dependence <- function() {
 }
 
 #' Register the copula families with the RoyAI core (called from .onLoad)
+#' @return The names of the registered dependence families, invisibly; called for its side effect of registering the copula families.
+#' @examples
+#' roy_copula_register()
+#' roy_dependence_families()
 #' @export
 roy_copula_register <- function() {
   if (!exists("roy_register_dependence", mode = "function")) return(invisible(FALSE))

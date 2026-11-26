@@ -10,11 +10,11 @@ roy_register_method(model, method, fitter, overwrite = FALSE)
 roy_methods()
 }
 \arguments{
-\item{model}{`"A"` or `"B"`.}
+\item{model}{\code{"A"} or \code{"B"}.}
 
-\item{method}{Method name, e.g. `"copula_ml"`.}
+\item{method}{Method name, e.g. \code{"copula_ml"}.}
 
-\item{fitter}{Function `fitter(spec, ...)`.}
+\item{fitter}{Function \code{fitter(spec, ...)}.}
 
 \item{overwrite}{Replace an existing registration?}
 }
@@ -23,7 +23,18 @@ The fitter, invisibly.
 }
 \description{
 Extension modules (e.g. a copula likelihood for Model B) can register an
-estimator under a `(model, method)` key. The fitter receives a
-[roy_spec()] object plus `...` and must return an object inheriting from
-`roy_fit` (see `PLUGIN_CONTRACT.md` in the package sources).
+estimator under a \verb{(model, method)} key. The fitter receives a
+\code{\link[=roy_spec]{roy_spec()}} object plus \code{...} and must return an object inheriting from
+\code{roy_fit} (see \code{PLUGIN_CONTRACT.md} in the package sources).
+}
+\examples{
+# a toy method that refits the specification with the built-in two-step
+# estimator; a real plug-in would implement its own estimator here
+my_twostep <- function(spec, ...)
+  roy(spec$outcome, spec$selection, data = spec$data, method = "twostep")
+roy_register_method("A", "my_twostep", my_twostep, overwrite = TRUE)
+roy_methods()
+dat <- roy_sim_A(n = 800, seed = 1)
+fit <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat, method = "my_twostep")
+coef(fit)[1:3]
 }

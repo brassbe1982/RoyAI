@@ -11,7 +11,7 @@ download_piaac_puf(
 )
 }
 \arguments{
-\item{countries}{ISO3 codes; defaults to [piaac_analysis_countries()].}
+\item{countries}{ISO3 codes; defaults to \code{\link[=piaac_analysis_countries]{piaac_analysis_countries()}}.}
 
 \item{dest}{Destination folder.}
 
@@ -21,8 +21,14 @@ download_piaac_puf(
 Paths of the CSV files, invisibly.
 }
 \description{
-Fetches `prg<cnt>p2.csv` (or the zipped CSV where the OECD distributes a
+Fetches \verb{prg<cnt>p2.csv} (or the zipped CSV where the OECD distributes a
 zip) from the OECD PIAAC public-use file server
 (\url{https://webfs.oecd.org/piaac/index.html}). By downloading you accept
 the OECD terms of use for the PIAAC data.
+}
+\examples{
+\dontrun{
+# needs an internet connection; downloads one country file of several MB
+files <- download_piaac_puf("CHL", dest = tempdir())
+}
 }

@@ -62,6 +62,10 @@
 #' @param gh number of Gauss-Hermite nodes
 #' @return list with `grid`, `dv` (array `T x (T+1) x length(grid)` of
 #'   `v_1 - v_0`), `Vbar` (expected value functions) and inputs
+#' @examples
+#' sol <- roy_dynamic_solve(list(sd_k = 0.25, sigma_e = 0.3, psi = 0.05,
+#'                               lambda = 0.1), T = 5)
+#' dim(sol$dv)
 #' @export
 roy_dynamic_solve <- function(par, T, beta = 0.95, grid = NULL, gh = 15) {
   sd_k <- par$sd_k; se <- par$sigma_e; psi <- par$psi; lam <- par$lambda
@@ -331,6 +335,13 @@ roy_dynamic <- function(data, id = "id", time = "t", choice = "s", outcome = "y"
 #' @param object,x a `"roy_dynamic"` fit
 #' @param ... unused
 #' @name roy_dynamic_methods
+#' @return `coef()` a named numeric vector, `vcov()` a matrix, `logLik()` an object of class `logLik`, `nobs()` an integer, `summary()` an object of class `summary.roy_dynamic`; the `print` methods return their argument invisibly.
+#' @examples
+#' set.seed(2)
+#' p <- roy_dynamic_sim(300, T = 5)
+#' fit <- roy_dynamic(p, cost = ~ x, method = "ccp")
+#' coef(fit)
+#' summary(fit)
 NULL
 
 #' @rdname roy_dynamic_methods
@@ -394,6 +405,11 @@ print.summary.roy_dynamic <- function(x, ...) {
 #' worker (`beta = 0`) at the same states.
 #' @param fit a `"roy_dynamic"` fit
 #' @return data.frame, one row per period
+#' @examples
+#' set.seed(2)
+#' p <- roy_dynamic_sim(300, T = 5)
+#' fit <- roy_dynamic(p, cost = ~ x, method = "ccp")
+#' roy_dynamic_effects(fit)
 #' @export
 roy_dynamic_effects <- function(fit) {
   stopifnot(inherits(fit, "roy_dynamic"))
@@ -432,6 +448,11 @@ roy_dynamic_effects <- function(fit) {
 #' @param beta discount factor
 #' @return long data.frame with `id`, `t`, `s`, `y`, `x`, potential outcomes
 #'   `y0`, `y1`, true `kappa` and beliefs `m`, `n`
+#' @examples
+#' set.seed(1)
+#' p <- roy_dynamic_sim(200, T = 5)
+#' head(p)
+#' tapply(p$s, p$t, mean)   # adoption rate by period
 #' @export
 roy_dynamic_sim <- function(N, T = 10, mu0 = 1, sigma0 = 0.3, mu_k = 0, sd_k = 0.25,
                             sigma_e = 0.3, psi = 0.05, cost = c(0.1, 0.1),

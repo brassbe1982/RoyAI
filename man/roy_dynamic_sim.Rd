@@ -25,7 +25,7 @@ roy_dynamic_sim(
 
 \item{mu0, sigma0}{human-only earnings mean and sd}
 
-\item{mu_k, sd_k}{mean and sd of initial complementarity `kappa_i1`}
+\item{mu_k, sd_k}{mean and sd of initial complementarity \code{kappa_i1}}
 
 \item{sigma_e}{noise sd of AI earnings (signal noise)}
 
@@ -38,12 +38,18 @@ roy_dynamic_sim(
 \item{beta}{discount factor}
 }
 \value{
-long data.frame with `id`, `t`, `s`, `y`, `x`, potential outcomes
-  `y0`, `y1`, true `kappa` and beliefs `m`, `n`
+long data.frame with \code{id}, \code{t}, \code{s}, \code{y}, \code{x}, potential outcomes
+\code{y0}, \code{y1}, true \code{kappa} and beliefs \code{m}, \code{n}
 }
 \description{
-Simulates `N` workers over `T` periods from the dynamic Roy model with
+Simulates \code{N} workers over \code{T} periods from the dynamic Roy model with
 Kalman learning and learning by doing, solving the model by
-[roy_dynamic_solve()]. The cost of AI use is `cost[1] + cost[2] * x` with
-`x ~ N(0, 1)` a time-invariant worker covariate.
+\code{\link[=roy_dynamic_solve]{roy_dynamic_solve()}}. The cost of AI use is \code{cost[1] + cost[2] * x} with
+\code{x ~ N(0, 1)} a time-invariant worker covariate.
+}
+\examples{
+set.seed(1)
+p <- roy_dynamic_sim(200, T = 5)
+head(p)
+tapply(p$s, p$t, mean)   # adoption rate by period
 }

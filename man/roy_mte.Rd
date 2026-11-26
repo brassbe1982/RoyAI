@@ -24,8 +24,18 @@ roy_mte(
 
 \item{se}{delta-method pointwise standard errors}
 }
+\value{
+A data frame with columns \code{u}, \code{mte} and, if \code{se = TRUE}, \code{se}, \code{lower} and \code{upper} (pointwise 95\% interval).
+}
 \description{
-MTE(x, u) = x'(beta_to - beta_from) + E[U_to - U_from | U_S = u],
+\verb{MTE(x, u) = x'(beta_to - beta_from) + E[U_to - U_from | U_S = u]},
 U_S = 1 - W the unobserved resistance to AI adoption.  For J > 2 (ordered)
 this is the MTE along the single latent AI-propensity index.
+}
+\examples{
+set.seed(2)
+d <- roy_copula_sim(1500, list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6),
+                    c(0.8, 1), c(-0.4, 0.5), "clayton")
+fit <- roy_copula_fit(y ~ x1, s ~ x1 + z1 + z2, d, family = "clayton")
+roy_mte(fit, u = c(0.1, 0.5, 0.9))
 }

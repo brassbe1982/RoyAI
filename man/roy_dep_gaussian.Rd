@@ -7,9 +7,14 @@
 roy_dep_gaussian()
 }
 \value{
-A [roy_dependence()] object.
+A \code{\link[=roy_dependence]{roy_dependence()}} object.
 }
 \description{
 With Gaussian margins this reproduces the textbook normal endogenous
-switching likelihood exactly; `theta` is the correlation \eqn{\rho}.
+switching likelihood exactly; \code{theta} is the correlation \eqn{\rho}.
+}
+\examples{
+g <- roy_dep_gaussian()
+g
+g$h(0.5, 0.3, 0.4)
 }

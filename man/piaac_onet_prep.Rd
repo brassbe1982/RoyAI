@@ -21,62 +21,67 @@ piaac_onet_prep(
 \item{piaac}{Data frame of the PIAAC public-use file (one or more
 countries).}
 
-\item{exposure}{Data frame with `isco08_2d`, the exposure column named by
-`exposure_col`, and (for Model B) `complementarity`, e.g. from
-[onet_to_isco2()].}
+\item{exposure}{Data frame with \code{isco08_2d}, the exposure column named by
+\code{exposure_col}, and (for Model B) \code{complementarity}, e.g. from
+\code{\link[=onet_to_isco2]{onet_to_isco2()}}.}
 
-\item{varmap}{Variable map, see [piaac_varmap()].}
+\item{varmap}{Variable map, see \code{\link[=piaac_varmap]{piaac_varmap()}}.}
 
 \item{pv}{Which plausible value to use (1-10). Full analyses should repeat
 over all plausible values and combine with Rubin's rules.}
 
-\item{thresholds}{List with quantiles `exposure`, `ict` and
-`complementarity`.}
+\item{thresholds}{List with quantiles \code{exposure}, \code{ict} and
+\code{complementarity}.}
 
 \item{adoption}{Optional function returning the regime for each row.}
 
 \item{min_wage_ppp}{Drop hourly earnings below this value (top/bottom
 coding and misreporting).}
 
-\item{exposure_col}{Column of `exposure` used as the AI-exposure measure.
+\item{exposure_col}{Column of \code{exposure} used as the AI-exposure measure.
 The main specification uses the Felten-Raj-Seamans AI Occupational
-Exposure index (`"aioe"`); rerun with the Eloundou et al. GPT-exposure
-score (e.g. `"gpt_beta"`) as a robustness check.}
+Exposure index (\code{"aioe"}); rerun with the Eloundou et al. GPT-exposure
+score (e.g. \code{"gpt_beta"}) as a robustness check.}
 
 \item{extra}{Optional named character vector of further PUF variables to
-carry along as numeric columns, e.g. `c(ict_home = "ICTHOMEC2")`. PUF
-CSV missing codes (".v", ".n", ...) become `NA`.}
+carry along as numeric columns, e.g. \code{c(ict_home = "ICTHOMEC2")}. PUF
+CSV missing codes (".v", ".n", ...) become \code{NA}.}
 
 \item{trim}{Share of hourly earnings trimmed at each tail within country
 (default 1 percent), against misreporting and extreme values.}
 }
 \value{
-A data frame with `id`, `country`, `weight`, `log_wage`, `skill_lit`,
-  `skill_num`, `skill_aps`, `age`, `age2`, `female`, `schooling`, `ict_work`,
-  `isco08_2d`, `ai_exposure`, `complementarity`, `d`, `s`; attribute `notes`
-  lists the assumptions used.
+A data frame with \code{id}, \code{country}, \code{weight}, \code{log_wage}, \code{skill_lit},
+\code{skill_num}, \code{skill_aps}, \code{age}, \code{age2}, \code{female}, \code{schooling}, \code{ict_work},
+\code{isco08_2d}, \code{ai_exposure}, \code{complementarity}, \code{d}, \code{s}; attribute \code{notes}
+lists the assumptions used.
 }
 \description{
 Merges an occupation-level AI-exposure table onto PIAAC respondents,
 builds the outcome (log hourly earnings), human-capital covariates, a
 skill measure from one plausible value, and the selection variables for
-Model A (`d`) and Model B (`s`).
+Model A (\code{d}) and Model B (\code{s}).
 }
 \details{
-**Regime definition (a documented limitation).** PIAAC Cycle 2
+\strong{Regime definition (a documented limitation).} PIAAC Cycle 2
 (fieldwork 2022-23) is treated as having no direct question on
 generative-AI use, so adoption is proxied and the regimes measure
-AI-ready work rather than observed AI use. Unless `adoption` is supplied:
+AI-ready work rather than observed AI use. Unless \code{adoption} is supplied:
 \itemize{
-  \item Model A: `d = 1` if the occupation's AI exposure is above the
-    `thresholds$exposure` quantile **and** the worker's ICT use at work is
-    above the within-country `thresholds$ict` quantile.
-  \item Model B, following the exposure-complementarity split of
-    Pizzinelli et al. (2023, IMF): `s = 0` (human-only) if not adopting;
-    among adopters `s = 1` (AI-augmented) if occupational complementarity
-    is above the `thresholds$complementarity` quantile, else `s = 2`
-    (AI-dominant).
+\item Model A: \code{d = 1} if the occupation's AI exposure is above the
+\code{thresholds$exposure} quantile \strong{and} the worker's ICT use at work is
+above the within-country \code{thresholds$ict} quantile.
+\item Model B, following the exposure-complementarity split of
+Pizzinelli et al. (2023, IMF): \code{s = 0} (human-only) if not adopting;
+among adopters \code{s = 1} (AI-augmented) if occupational complementarity
+is above the \code{thresholds$complementarity} quantile, else \code{s = 2}
+(AI-dominant).
 }
-Supply `adoption = function(df) <integer 0/1/2 vector>` to use your own
+Supply \verb{adoption = function(df) <integer 0/1/2 vector>} to use your own
 definition (for example a survey item on AI tool use, if available).
+}
+\examples{
+ex <- piaac_example(n = 1000)
+d <- piaac_onet_prep(ex$piaac, ex$exposure)
+head(d)
 }

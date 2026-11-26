@@ -28,6 +28,10 @@
 #'   flagged as near-collinear.
 #' @return An object of class `roy_diagnostics`: a list of the components
 #'   above plus `flags`, a character vector of warnings in plain language.
+#' @examples
+#' dat <- roy_sim_A(n = 1500, seed = 1)
+#' fit <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+#' roy_diagnostics(fit)
 #' @export
 roy_diagnostics <- function(fit, overlap_eps = 0.02, rho_bound = 0.95, kappa_bound = 1e3) {
   stopifnot(inherits(fit, "roy_fit"))
@@ -156,6 +160,11 @@ print.roy_diagnostics <- function(x, ...) {
 #' @param restricted,full Fitted `roy_fit` objects estimated by ML on the
 #'   same data, with `restricted` nested in `full`.
 #' @return A list of class `htest`.
+#' @examples
+#' dat <- roy_sim_A(n = 1500, seed = 1)
+#' f1 <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+#' f0 <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat, dependence = "independence")
+#' roy_lrtest(f0, f1)
 #' @export
 roy_lrtest <- function(restricted, full) {
   if (is.na(restricted$loglik) || is.na(full$loglik)) stop("both models must be ML fits")
@@ -180,6 +189,11 @@ roy_lrtest <- function(restricted, full) {
 #' @param ... Fitted `roy_fit` objects (ML), optionally named.
 #' @return A data frame with log-likelihood, number of parameters, AIC and
 #'   BIC, sorted by AIC.
+#' @examples
+#' dat <- roy_sim_A(n = 1500, seed = 1)
+#' f1 <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+#' f0 <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat, dependence = "independence")
+#' roy_ic(f0, f1)
 #' @export
 roy_ic <- function(...) {
   fits <- list(...)

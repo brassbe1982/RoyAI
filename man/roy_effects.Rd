@@ -7,13 +7,13 @@
 roy_effects(fit, se = TRUE)
 }
 \arguments{
-\item{fit}{A `roy_fit` object.}
+\item{fit}{A \code{roy_fit} object.}
 
 \item{se}{Compute standard errors?}
 }
 \value{
-A data frame with columns `contrast`, `population`, `estimate`,
-  `se`.
+A data frame with columns \code{contrast}, \code{population}, \code{estimate},
+\code{se}.
 }
 \description{
 For Model A: ATE, ATT (adopters) and ATU (non-adopters) of AI adoption,
@@ -21,5 +21,10 @@ For Model A: ATE, ATT (adopters) and ATU (non-adopters) of AI adoption,
 \eqn{(k, j)} with \eqn{k > j}, the average effect of moving from regime
 \eqn{j} to \eqn{k} in the population and within each observed regime.
 Standard errors use the delta method on the fitted parameter covariance
-(or the bootstrap draws when the fit used `se = "bootstrap"`).
+(or the bootstrap draws when the fit used \code{se = "bootstrap"}).
+}
+\examples{
+dat <- roy_sim_A(n = 1500, seed = 1)
+fit <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+roy_effects(fit)
 }

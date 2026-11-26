@@ -7,14 +7,17 @@
 piaac_analysis_countries()
 }
 \value{
-A data frame with ISO3 code, numeric `CNTRYID` and country name.
+A data frame with ISO3 code, numeric \code{CNTRYID} and country name.
 }
 \description{
-From the OECD file `piaac-cy2-missing_variables-puf.xlsx`: the countries
-whose public-use file keeps `ISCO2C`, `EARNHRBONUSPPPC2`, `YRSQUALC2`,
-`GENDER_R`, `ICTWORKC2` and the plausible values. Earnings are suppressed
+From the OECD file \code{piaac-cy2-missing_variables-puf.xlsx}: the countries
+whose public-use file keeps \code{ISCO2C}, \code{EARNHRBONUSPPPC2}, \code{YRSQUALC2},
+\code{GENDER_R}, \code{ICTWORKC2} and the plausible values. Earnings are suppressed
 in 17 PUFs and 2-digit occupation in 12, which leaves ten. The released
 CSV files (checked 2026-11-25) suppress more than that table says: Croatia
-and Lithuania code every `ISCO2C` as 999 ("not stated"), and Spain and the
+and Lithuania code every \code{ISCO2C} as 999 ("not stated"), and Spain and the
 Slovak Republic have no valid hourly earnings. That leaves these six.
+}
+\examples{
+piaac_analysis_countries()
 }

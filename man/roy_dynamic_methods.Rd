@@ -26,10 +26,20 @@
 \method{print}{summary.roy_dynamic}(x, ...)
 }
 \arguments{
-\item{object, x}{a `"roy_dynamic"` fit}
+\item{object, x}{a \code{"roy_dynamic"} fit}
 
 \item{...}{unused}
 }
+\value{
+\code{coef()} a named numeric vector, \code{vcov()} a matrix, \code{logLik()} an object of class \code{logLik}, \code{nobs()} an integer, \code{summary()} an object of class \code{summary.roy_dynamic}; the \code{print} methods return their argument invisibly.
+}
 \description{
 Methods for Model E fits
+}
+\examples{
+set.seed(2)
+p <- roy_dynamic_sim(300, T = 5)
+fit <- roy_dynamic(p, cost = ~ x, method = "ccp")
+coef(fit)
+summary(fit)
 }

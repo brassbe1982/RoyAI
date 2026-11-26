@@ -22,20 +22,26 @@ roy_lee_terms(P, s)
 \item{s}{Regime (0-based).}
 }
 \value{
-A numeric vector (`roy_imr`, `roy_lee_terms`) or an n x J matrix
-  (`roy_dmf_terms`).
+A numeric vector (\code{roy_imr}, \code{roy_lee_terms}) or an n x J matrix
+(\code{roy_dmf_terms}).
 }
 \description{
-`roy_imr()` returns the inverse Mills ratios for Model A:
+\code{roy_imr()} returns the inverse Mills ratios for Model A:
 \eqn{\lambda_1 = \phi(c)/\Phi(c)} for \eqn{D=1} and
 \eqn{\lambda_0 = -\phi(c)/\Phi(-c)} for \eqn{D=0}, with \eqn{c = Z'\gamma}.
 }
 \details{
-`roy_dmf_terms()` returns, for regime `s`, the Bourguignon-Fournier-Gurgand
+\code{roy_dmf_terms()} returns, for regime \code{s}, the Bourguignon-Fournier-Gurgand
 (2007) version of the Dubin-McFadden terms
 \eqn{m_j = E[\varepsilon_j - \gamma_E \mid S = s]}: \eqn{-\log P_s} for
 \eqn{j = s} and \eqn{P_j \log P_j / (1 - P_j)} for \eqn{j \neq s}.
 
-`roy_lee_terms()` returns Lee's (1983) term
+\code{roy_lee_terms()} returns Lee's (1983) term
 \eqn{-\phi(\Phi^{-1}(P_s))/P_s}.
+}
+\examples{
+roy_imr(c(-1, 0, 1), d = c(1, 0, 1))
+P <- matrix(c(0.5, 0.3, 0.2, 0.2, 0.5, 0.3), nrow = 2, byrow = TRUE)
+roy_dmf_terms(P, s = 1)
+roy_lee_terms(P, s = 1)
 }

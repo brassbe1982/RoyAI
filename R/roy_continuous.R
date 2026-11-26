@@ -67,6 +67,8 @@
 #' @param v selection uniform(s)
 #' @param cp copula parameter list from [copula_par()]
 #' @return numeric vector of log-densities
+#' @examples
+#' copula_logdens(c(0.2, 0.7), c(0.3, 0.6), copula_par("gumbel", tau = 0.5))
 #' @export
 copula_logdens <- function(u, v, cp) {
   if (cp$rot == 90) .copula_logdens_base(1 - u, v, cp) else .copula_logdens_base(u, v, cp)
@@ -303,6 +305,14 @@ roy_continuous <- function(outcome, intensity, data, dose = NULL, scale = NULL,
 #' @param object,x a `"roy_continuous"` fit
 #' @param ... unused
 #' @name roy_continuous_methods
+#' @return `coef()` a named numeric vector, `vcov()` a matrix, `logLik()` an object of class `logLik`, `nobs()` an integer, `summary()` an object of class `summary.roy_continuous` (a coefficient table); the `print` methods return their argument invisibly.
+#' @examples
+#' set.seed(1)
+#' d <- roy_continuous_sim(600, tau = 0.4)
+#' fit <- roy_continuous(y ~ x1, a ~ x1 + z1 + z2, d, family = "gaussian")
+#' coef(fit)
+#' summary(fit)
+#' logLik(fit); nobs(fit)
 NULL
 
 #' @rdname roy_continuous_methods
@@ -417,6 +427,11 @@ print.summary.roy_continuous <- function(x, ...) {
 #' @param grid intensity grid for the dose-response function
 #' @param se compute delta-method standard errors
 #' @return data.frame with columns `estimand`, `a`, `estimate`, `se`
+#' @examples
+#' set.seed(1)
+#' d <- roy_continuous_sim(600, tau = 0.4)
+#' fit <- roy_continuous(y ~ x1, a ~ x1 + z1 + z2, d, family = "gaussian")
+#' roy_continuous_effects(fit, a = c(0.2, 0.5), se = FALSE)
 #' @export
 roy_continuous_effects <- function(fit, a = c(0.2, 0.5, 0.8), delta = 0.1,
                                    grid = seq(0, 0.95, by = 0.05), se = TRUE) {
@@ -453,6 +468,11 @@ roy_continuous_effects <- function(fit, a = c(0.2, 0.5, 0.8), delta = 0.1,
 #' @param covariates optional data.frame with x1, z1, z2
 #' @return data.frame with `y`, `a`, covariates, `eps`, `v` and the
 #'   potential-outcome function is recoverable from the true parameters
+#' @examples
+#' set.seed(1)
+#' d <- roy_continuous_sim(500, tau = 0.4, family = "clayton")
+#' summary(d$a)
+#' mean(d$a == 0)   # share of non-users
 #' @export
 roy_continuous_sim <- function(n, beta_x = c(1, 0.5), beta_a = c(0.8, -0.4),
                                alpha = c(log(0.6), 0.5), gamma = c(0.6, 0.3, 0.8, 0.6),
@@ -484,6 +504,12 @@ roy_continuous_sim <- function(n, beta_x = c(1, 0.5), beta_a = c(0.8, -0.4),
 #' @inheritParams roy_continuous_sim
 #' @inheritParams roy_continuous_effects
 #' @param covariates data.frame with x1, z1, z2 over which to average
+#' @return A data frame with columns `estimand` (`dose_response`, `TT`, `ATE`, `TUT`), `a` and `truth`.
+#' @examples
+#' set.seed(1)
+#' cov <- data.frame(x1 = rnorm(2000), z1 = rnorm(2000), z2 = rbinom(2000, 1, 0.5))
+#' tr <- roy_continuous_truth(tau = 0.4, covariates = cov, a = 0.5)
+#' str(tr, max.level = 1)
 #' @export
 roy_continuous_truth <- function(beta_x = c(1, 0.5), beta_a = c(0.8, -0.4),
                                  alpha = c(log(0.6), 0.5), gamma = c(0.6, 0.3, 0.8, 0.6),

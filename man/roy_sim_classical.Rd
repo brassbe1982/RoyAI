@@ -24,17 +24,21 @@ roy_sim_classical(
 
 \item{rho01}{Correlation of (U0, U1).}
 
-\item{pi}{Cost coefficient on `w`.}
+\item{pi}{Cost coefficient on \code{w}.}
 
 \item{seed}{Optional random seed.}
 }
 \value{
-A data frame with attribute `"truth"`.
+A data frame with attribute \code{"truth"}.
 }
 \description{
 \eqn{Y_s = \beta_{s0} + \beta_{s1} x_1 + \beta_{s2} x_2 + U_s} with
 \eqn{(U_0, U_1)} bivariate normal, and \eqn{D = 1(Y_1 - Y_0 - \pi w > 0)}.
-With `pi = 0` this is Roy's original model: workers simply choose the
-sector with the higher income. `w ~ N(0,1)` is an observed cost shifter
+With \code{pi = 0} this is Roy's original model: workers simply choose the
+sector with the higher income. \code{w ~ N(0,1)} is an observed cost shifter
 (e.g. AI training or subscription cost).
+}
+\examples{
+dat <- roy_sim_classical(n = 1000, seed = 1)
+mean(dat$d)
 }

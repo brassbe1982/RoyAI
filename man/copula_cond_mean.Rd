@@ -2,7 +2,7 @@
 % Please edit documentation in R/roy_mte.R
 \name{copula_cond_mean}
 \alias{copula_cond_mean}
-\title{Conditional mean E[U_j | W = w] for a copula with N(0, sigma^2) margin}
+\title{Conditional mean \verb{E[U_j | W = w]} for a copula with \code{N(0, sigma^2)} margin}
 \usage{
 copula_cond_mean(w, cp, sigma = 1)
 }
@@ -13,7 +13,14 @@ copula_cond_mean(w, cp, sigma = 1)
 
 \item{sigma}{outcome error sd}
 }
+\value{
+A numeric vector of conditional means, one per element of \code{w}.
+}
 \description{
-Uses E[Z | w] = int_0^inf (1 - G(z|w)) dz - int_-inf^0 G(z|w) dz with
-G(z|w) = dC(Phi(z), w)/dw, Simpson's rule on z in [-9, 9].
+Uses \verb{E[Z | w] = int_0^inf (1 - G(z|w)) dz - int_-inf^0 G(z|w) dz} with
+\code{G(z|w) = dC(Phi(z), w)/dw}, Simpson's rule on \code{z} in \verb{[-9, 9]}.
+}
+\examples{
+cp <- copula_par("gaussian", tau = 0.4)
+copula_cond_mean(c(0.1, 0.5, 0.9), cp, sigma = 1.3)
 }

@@ -27,17 +27,21 @@ roy_sim_B(
 \item{seed}{Optional random seed.}
 }
 \value{
-A data frame with `y`, `s`, `x1`, `x2`, `z1`, `z2`, latent `y0`,
-  `y1`, `y2`, and attribute `"truth"`.
+A data frame with \code{y}, \code{s}, \code{x1}, \code{x2}, \code{z1}, \code{z2}, latent \code{y0},
+\code{y1}, \code{y2}, and attribute \code{"truth"}.
 }
 \description{
 Choice: \eqn{S = \arg\max_s \{Z'\gamma_s + \varepsilon_s\}}, i.i.d. Gumbel
 \eqn{\varepsilon_s}, \eqn{\gamma_0 = 0}, with
-\eqn{Z = (1, x_1, x_2, z_1, z_2)}; `z1` shifts the cost of AI augmentation
-and `z2` the cost of AI-dominant production. Outcomes:
+\eqn{Z = (1, x_1, x_2, z_1, z_2)}; \code{z1} shifts the cost of AI augmentation
+and \code{z2} the cost of AI-dominant production. Outcomes:
 \eqn{Y_s = X'\beta_s + U_s},
 \eqn{U_s = \sigma_s(\sum_j r_{sj}\varepsilon^*_j + \sqrt{1 - \sum_j r_{sj}^2}\,\eta_s)},
 where \eqn{\varepsilon^*_j} are the standardized Gumbel errors. Under this
 design the Dubin-McFadden correction is exactly correct, and the true
 correction coefficients are \eqn{\lambda_{sj} = \sigma_s r_{sj}\sqrt{6}/\pi}.
+}
+\examples{
+dat <- roy_sim_B(n = 1500, seed = 1)
+table(dat$s)
 }

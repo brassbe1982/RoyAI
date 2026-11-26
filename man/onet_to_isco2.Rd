@@ -12,19 +12,19 @@ onet_to_isco2(
 )
 }
 \arguments{
-\item{exposure}{Data frame with a `soc` column and one or more numeric
+\item{exposure}{Data frame with a \code{soc} column and one or more numeric
 measure columns.}
 
-\item{crosswalk}{Data frame with columns `soc` and `isco08`; defaults to
-[isco_soc_crosswalk()]. ISCO codes of 3 or more digits;
+\item{crosswalk}{Data frame with columns \code{soc} and \code{isco08}; defaults to
+\code{\link[=isco_soc_crosswalk]{isco_soc_crosswalk()}}. ISCO codes of 3 or more digits;
 many-to-many links are allowed.}
 
 \item{measures}{Names of the measure columns to aggregate.}
 
-\item{weight}{Optional name of an employment-weight column in `exposure`.}
+\item{weight}{Optional name of an employment-weight column in \code{exposure}.}
 }
 \value{
-Data frame with `isco08_2d` and the averaged measures.
+Data frame with \code{isco08_2d} and the averaged measures.
 }
 \description{
 Occupation-level AI-exposure measures are published on the O*NET-SOC /
@@ -33,4 +33,10 @@ Felten, Raj and Seamans, or the GPT-exposure scores of Eloundou et al.),
 while PIAAC reports ISCO-08. This helper maps SOC codes to ISCO-08 with a
 crosswalk (e.g. the BLS ISCO-08 to SOC 2010 crosswalk) and averages to the
 2-digit ISCO level, optionally weighting by employment.
+}
+\examples{
+cw <- isco_soc_crosswalk()
+set.seed(1)
+ex <- data.frame(soc = unique(cw$soc), aioe = rnorm(length(unique(cw$soc))))
+head(onet_to_isco2(ex, measures = "aioe"))
 }

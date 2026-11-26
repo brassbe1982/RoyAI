@@ -3,7 +3,7 @@
 \name{roy_te}
 \alias{roy_te}
 \title{Average treatment parameters: ATE, ATT, ATU (binary) or effects of
-regime `to` versus `from` conditional on each observed regime (J > 2)}
+regime \code{to} versus \code{from} conditional on each observed regime (J > 2)}
 \usage{
 roy_te(fit, to = 1, from = 0, se = TRUE, newdata = NULL)
 }
@@ -21,5 +21,12 @@ data.frame of estimates and standard errors
 }
 \description{
 Average treatment parameters: ATE, ATT, ATU (binary) or effects of
-regime `to` versus `from` conditional on each observed regime (J > 2)
+regime \code{to} versus \code{from} conditional on each observed regime (J > 2)
+}
+\examples{
+set.seed(2)
+d <- roy_copula_sim(1500, list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6),
+                    c(0.8, 1), c(-0.4, 0.5), "clayton")
+fit <- roy_copula_fit(y ~ x1, s ~ x1 + z1 + z2, d, family = "clayton")
+roy_te(fit)
 }

@@ -22,45 +22,47 @@ roy_dynamic(
 \item{id, time, choice, outcome}{column names}
 
 \item{cost}{one-sided formula for the cost of AI use in terms of
-time-invariant worker covariates (first row per worker is used); `~ 1`
+time-invariant worker covariates (first row per worker is used); \code{~ 1}
 by default}
 
 \item{beta}{discount factor (fixed)}
 
-\item{method}{`"nfxp"` or `"ccp"`}
+\item{method}{\code{"nfxp"} or \code{"ccp"}}
 
-\item{control}{passed to [stats::optim()]}
+\item{control}{passed to \code{\link[stats:optim]{stats::optim()}}}
 }
 \value{
-object of class `"roy_dynamic"`
+object of class \code{"roy_dynamic"}
 }
 \description{
 Estimates the two-arrangement dynamic Roy model of the monograph (Section
 5.5) from a balanced panel of choices (0 = human-only, 1 = AI) and
-observed earnings. Workers learn their complementarity `kappa_i` from AI
+observed earnings. Workers learn their complementarity \code{kappa_i} from AI
 earnings by Bayesian (Kalman) updating and acquire complementarity by
-doing at rate `psi`; they choose by comparing expected net current gains
-`m_it - c_i` plus continuation values, with logit shocks of scale `lambda`.
+doing at rate \code{psi}; they choose by comparing expected net current gains
+\code{m_it - c_i} plus continuation values, with logit shocks of scale \code{lambda}.
 The discount factor is fixed (it is not identified jointly with flow
 payoffs).
 }
 \details{
 Estimation is in two stages. Stage 1 maximises the earnings likelihood
-(Kalman prediction errors) for `mu0, sigma0, mu_k, sd_k, sigma_e, psi`;
+(Kalman prediction errors) for \verb{mu0, sigma0, mu_k, sd_k, sigma_e, psi};
 this is consistent on its own because choices depend on past earnings
 only through beliefs. Stage 2 estimates the cost coefficients and
-`lambda`:
-* `method = "nfxp"` (default): nested fixed point. The model is solved by
-  backward induction ([roy_dynamic_solve()]) inside the choice likelihood;
-  the two stages are then polished jointly on the full likelihood, so the
-  standard errors are full-information ones.
-* `method = "ccp"`: conditional choice probabilities (Hotz and Miller 1993,
-  monograph Lemma "lem:hm"). A flexible first-stage logit estimates
-  `P(s = 1 | t, n, m, X)`; because staying human-only freezes the state, the
-  continuation-value difference is
-  `beta sum_{tau > t} beta^(tau-t-1) [ln P0_tau(n, m) - E ln P0_tau(n+1, m')]`,
-  and the structural parameters come from one logit with this offset. Fast;
-  stage-2 standard errors are conditional on stage 1.
+\code{lambda}:
+\itemize{
+\item \code{method = "nfxp"} (default): nested fixed point. The model is solved by
+backward induction (\code{\link[=roy_dynamic_solve]{roy_dynamic_solve()}}) inside the choice likelihood;
+the two stages are then polished jointly on the full likelihood, so the
+standard errors are full-information ones.
+\item \code{method = "ccp"}: conditional choice probabilities (Hotz and Miller 1993,
+monograph Lemma "lem:hm"). A flexible first-stage logit estimates
+\code{P(s = 1 | t, n, m, X)}; because staying human-only freezes the state, the
+continuation-value difference is
+\verb{beta sum_\{tau > t\} beta^(tau-t-1) [ln P0_tau(n, m) - E ln P0_tau(n+1, m')]},
+and the structural parameters come from one logit with this offset. Fast;
+stage-2 standard errors are conditional on stage 1.
+}
 }
 \examples{
 set.seed(2)

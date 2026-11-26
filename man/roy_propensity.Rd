@@ -7,7 +7,7 @@
 roy_propensity(fit, newdata = NULL)
 }
 \arguments{
-\item{fit}{A `roy_fit` object.}
+\item{fit}{A \code{roy_fit} object.}
 
 \item{newdata}{Optional data frame.}
 }
@@ -16,4 +16,9 @@ n x J matrix of probabilities of each regime.
 }
 \description{
 Fitted selection probabilities
+}
+\examples{
+dat <- roy_sim_A(n = 1500, seed = 1)
+fit <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+head(roy_propensity(fit))
 }

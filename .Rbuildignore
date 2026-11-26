@@ -6,3 +6,8 @@
 ^inst/montecarlo/results/raw$
 ^inst/montecarlo-DE/results/.*_raw\.rds$
 ^LICENSE\.md$
+^\.github$
+^\.gitignore$
+^cran-comments\.md$
+^tests/testthat/_problems$
+^CRAN-SUBMISSION$

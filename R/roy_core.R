@@ -506,6 +506,14 @@ MASS_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
 #'   of `"selection"`, `"outcome"`, `"sigma"`, `"dependence"`, `"correction"`.
 #' @param ... Unused.
 #' @name roy_fit_methods
+#' @return `coef()` a named numeric vector, `vcov()` a matrix, `logLik()` an object of class `logLik`, `nobs()` an integer, `summary()` an object of class `summary.roy_fit`, `predict()` a numeric vector or matrix of predictions; the `print` methods return their argument invisibly.
+#' @examples
+#' dat <- roy_sim_A(n = 1500, seed = 1)
+#' fit <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+#' coef(fit)
+#' sqrt(diag(vcov(fit)))[1:3]
+#' logLik(fit); nobs(fit)
+#' head(predict(fit))
 NULL
 
 #' @rdname roy_fit_methods

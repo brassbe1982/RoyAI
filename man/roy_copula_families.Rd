@@ -7,6 +7,9 @@
 A character vector.
 }
 \description{
-Character vector of the dependence families implemented in `roy_copula`
-(registered for [roy()] at load time by `roy_copula_register()`).
+Character vector of the dependence families implemented in \code{roy_copula}
+(registered for \code{\link[=roy]{roy()}} at load time by \code{roy_copula_register()}).
+}
+\examples{
+roy_copula_families
 }

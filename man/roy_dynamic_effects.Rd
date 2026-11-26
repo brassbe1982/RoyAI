@@ -7,19 +7,25 @@
 roy_dynamic_effects(fit)
 }
 \arguments{
-\item{fit}{a `"roy_dynamic"` fit}
+\item{fit}{a \code{"roy_dynamic"} fit}
 }
 \value{
 data.frame, one row per period
 }
 \description{
-By period, from a [roy_dynamic()] fit: the AI share; the average gain
-`E[kappa_it]` for everyone (ATE), adopters (ATT) and non-adopters (ATU),
+By period, from a \code{\link[=roy_dynamic]{roy_dynamic()}} fit: the AI share; the average gain
+\code{E[kappa_it]} for everyone (ATE), adopters (ATT) and non-adopters (ATU),
 estimated by posterior means (unbiased under the model's rational
 expectations); the naive cross-sectional earnings gap; the share of
-adopters whose expected net current gain `m_it - c_i` is negative, who
+adopters whose expected net current gain \code{m_it - c_i} is negative, who
 adopt for the option value of learning and the human capital from doing
 (monograph Propositions "prop:dyn"(b) and "prop:experiment"); and the
 predicted AI share of the fitted forward-looking model versus a myopic
-worker (`beta = 0`) at the same states.
+worker (\code{beta = 0}) at the same states.
+}
+\examples{
+set.seed(2)
+p <- roy_dynamic_sim(300, T = 5)
+fit <- roy_dynamic(p, cost = ~ x, method = "ccp")
+roy_dynamic_effects(fit)
 }

@@ -7,13 +7,17 @@
 isco_soc_crosswalk()
 }
 \value{
-Data frame with `isco08`, `soc` (SOC 2010, "XX-XXXX"), and labels.
+Data frame with \code{isco08}, \code{soc} (SOC 2010, "XX-XXXX"), and labels.
 }
 \description{
-Reads `inst/extdata/isco08_soc10.csv`: a one-to-many crosswalk from 3-digit
+Reads \code{inst/extdata/isco08_soc10.csv}: a one-to-many crosswalk from 3-digit
 ISCO-08 groups to detailed SOC 2010 occupations, taken from the
-`iscoCrosswalks` package (MIT licence; IBS, after Hardy, Keister and
+\code{iscoCrosswalks} package (MIT licence; IBS, after Hardy, Keister and
 Lewandowski 2018, built on the BLS ISCO-08/SOC 2010 crosswalk). See
-`isco08_soc10_SOURCE.txt` in the same folder. The official BLS file can be
-used instead by passing it to [onet_to_isco2()].
+\code{isco08_soc10_SOURCE.txt} in the same folder. The official BLS file can be
+used instead by passing it to \code{\link[=onet_to_isco2]{onet_to_isco2()}}.
+}
+\examples{
+cw <- isco_soc_crosswalk()
+head(cw[, c("isco08", "soc")])
 }

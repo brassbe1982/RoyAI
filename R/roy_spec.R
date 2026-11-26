@@ -17,6 +17,9 @@
 #' @param data A data frame.
 #' @param regimes Optional labels for the regimes, in order.
 #' @return An object of class `roy_spec`.
+#' @examples
+#' dat <- roy_sim_A(n = 500, seed = 1)
+#' roy_spec(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
 #' @export
 roy_spec <- function(outcome, selection, data, regimes = NULL) {
   stopifnot(inherits(outcome, "formula"), inherits(selection, "formula"),

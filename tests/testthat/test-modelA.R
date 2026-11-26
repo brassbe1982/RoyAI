@@ -60,6 +60,7 @@ test_that("classical Roy is a restriction of the generalized model", {
 })
 
 test_that("diagnostics run and flag missing exclusion restrictions", {
+  skip_on_cran()  # slow (> 3 s); runs when NOT_CRAN = "true"
   f <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
   dg <- roy_diagnostics(f)
   expect_s3_class(dg, "roy_diagnostics")

@@ -7,11 +7,17 @@
 read_soc_2010_2018(path)
 }
 \arguments{
-\item{path}{Path to `soc_2010_to_2018_crosswalk.xlsx` from BLS.}
+\item{path}{Path to \code{soc_2010_to_2018_crosswalk.xlsx} from BLS.}
 }
 \value{
-Data frame with `soc2010` and `soc2018`.
+Data frame with \code{soc2010} and \code{soc2018}.
 }
 \description{
 Read the BLS SOC 2010 to 2018 crosswalk
+}
+\examples{
+\dontrun{
+# needs soc_2010_to_2018_crosswalk.xlsx from the U.S. Bureau of Labor Statistics
+xw <- read_soc_2010_2018("soc_2010_to_2018_crosswalk.xlsx")
+}
 }
