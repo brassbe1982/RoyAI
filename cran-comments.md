@@ -19,10 +19,8 @@ effects.
   `NOT_CRAN = "true"`): Windows, macOS and Ubuntu with R release, devel and
   oldrel-1, <https://github.com/brassbe1982/RoyAI/actions>:
   all 9 jobs passed (0 errors, 0 warnings) on 2026-11-26.
-* win-builder, R-devel and R-release: [TO BE RUN BY THE MAINTAINER:
-  devtools::check_win_devel(), devtools::check_win_release(); results arrive by
-  e-mail]
-* macOS builder: [TO BE RUN BY THE MAINTAINER: devtools::check_mac_release()]
+* win-builder, R-devel (2026-11-17 r90926 ucrt): 1 NOTE (new submission;
+  see below).
 
 ## R CMD check results
 
