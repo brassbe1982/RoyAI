@@ -551,7 +551,7 @@ roy_copula_select <- function(outcome, selection, data,
 #'   z1 ~ N(0,1), z2 ~ Bernoulli(0.5).  Columns are taken in order:
 #'   X uses the first `length(beta[[1]]) - 1` columns, Z the first `nrow(gamma) - 1`.
 #' @return data.frame with y, s (observed regime), potential outcomes
-#'   y0..y{J-1}, selection uniform(s) and covariates
+#'   y0, ..., y(J-1), selection uniform(s) and covariates
 #' @examples
 #' set.seed(1)
 #' d <- roy_copula_sim(1000, beta = list(c(0.5, 0.3), c(1, 0.5)),

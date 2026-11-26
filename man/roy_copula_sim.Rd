@@ -46,7 +46,7 @@ X uses the first \code{length(beta[[1]]) - 1} columns, Z the first \code{nrow(ga
 }
 \value{
 data.frame with y, s (observed regime), potential outcomes
-y0..y{J-1}, selection uniform(s) and covariates
+y0, ..., y(J-1), selection uniform(s) and covariates
 }
 \description{
 Simulate from the copula generalized Roy model (Model C)
