@@ -11,8 +11,15 @@ copula_hfunc(v, u, cp)
 
 \item{u}{outcome uniform(s)}
 
-\item{cp}{copula parameter list from [copula_par()]}
+\item{cp}{copula parameter list from \code{\link[=copula_par]{copula_par()}}}
+}
+\value{
+A numeric vector of conditional probabilities \eqn{P(V \le v \mid U = u)}.
 }
 \description{
 Conditional copula CDF h(v | u) = dC(u, v)/du (handles rotation)
+}
+\examples{
+cp <- copula_par("frank", tau = 0.3)
+copula_hfunc(c(0.2, 0.5, 0.8), u = 0.4, cp = cp)
 }

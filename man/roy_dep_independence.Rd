@@ -7,9 +7,12 @@
 roy_dep_independence()
 }
 \value{
-A [roy_dependence()] object.
+A \code{\link[=roy_dependence]{roy_dependence()}} object.
 }
 \description{
 Useful as the null model in diagnostics: with independence, selection is
 on observables only and OLS within each regime is consistent.
+}
+\examples{
+roy_dep_independence()
 }

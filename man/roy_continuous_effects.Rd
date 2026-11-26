@@ -13,7 +13,7 @@ roy_continuous_effects(
 )
 }
 \arguments{
-\item{fit}{a `"roy_continuous"` fit}
+\item{fit}{a \code{"roy_continuous"} fit}
 
 \item{a}{intensities at which to evaluate TT, ATE and TUT}
 
@@ -24,17 +24,25 @@ roy_continuous_effects(
 \item{se}{compute delta-method standard errors}
 }
 \value{
-data.frame with columns `estimand`, `a`, `estimate`, `se`
+data.frame with columns \code{estimand}, \code{a}, \code{estimate}, \code{se}
 }
 \description{
-Computes, from a [roy_continuous()] fit,
-* the average dose-response function `mu_bar(a) = E[Y(a)]` on `grid`;
-* `TT(a)`: the effect of raising intensity by `delta` for workers currently
-  at intensity `a`, `E[Y(a + delta) - Y(a) | A = a]` (monograph Section 5.4);
-* `ATE(a)`: the same increase averaged over all workers;
-* `TUT(a)`: the effect of moving current non-users from 0 to `a`,
-  `E[Y(a) - Y(0) | A = 0]`.
-Conditioning on `A = a` integrates over the sample distribution of
-`(X, Z)` weighted by the density of intensity at `a`. Delta-method
+Computes, from a \code{\link[=roy_continuous]{roy_continuous()}} fit,
+\itemize{
+\item the average dose-response function \code{mu_bar(a) = E[Y(a)]} on \code{grid};
+\item \code{TT(a)}: the effect of raising intensity by \code{delta} for workers currently
+at intensity \code{a}, \verb{E[Y(a + delta) - Y(a) | A = a]} (monograph Section 5.4);
+\item \code{ATE(a)}: the same increase averaged over all workers;
+\item \code{TUT(a)}: the effect of moving current non-users from 0 to \code{a},
+\verb{E[Y(a) - Y(0) | A = 0]}.
+Conditioning on \code{A = a} integrates over the sample distribution of
+\verb{(X, Z)} weighted by the density of intensity at \code{a}. Delta-method
 standard errors use the observed-information covariance.
+}
+}
+\examples{
+set.seed(1)
+d <- roy_continuous_sim(600, tau = 0.4)
+fit <- roy_continuous(y ~ x1, a ~ x1 + z1 + z2, d, family = "gaussian")
+roy_continuous_effects(fit, a = c(0.2, 0.5), se = FALSE)
 }

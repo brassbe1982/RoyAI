@@ -32,13 +32,17 @@
   .roy_cache$sgrid
 }
 
-#' Conditional mean E[U_j | W = w] for a copula with N(0, sigma^2) margin
+#' Conditional mean `E[U_j | W = w]` for a copula with `N(0, sigma^2)` margin
 #'
-#' Uses E[Z | w] = int_0^inf (1 - G(z|w)) dz - int_-inf^0 G(z|w) dz with
-#' G(z|w) = dC(Phi(z), w)/dw, Simpson's rule on z in [-9, 9].
+#' Uses `E[Z | w] = int_0^inf (1 - G(z|w)) dz - int_-inf^0 G(z|w) dz` with
+#' `G(z|w) = dC(Phi(z), w)/dw`, Simpson's rule on `z` in `[-9, 9]`.
 #' @param w selection uniforms
 #' @param cp copula parameter list from copula_par()
 #' @param sigma outcome error sd
+#' @return A numeric vector of conditional means, one per element of `w`.
+#' @examples
+#' cp <- copula_par("gaussian", tau = 0.4)
+#' copula_cond_mean(c(0.1, 0.5, 0.9), cp, sigma = 1.3)
 #' @export
 copula_cond_mean <- function(w, cp, sigma = 1) {
   g <- .zgrid(); nz <- length(g$z)
@@ -117,6 +121,12 @@ copula_cond_mean <- function(w, cp, sigma = 1) {
 #' @param se compute delta-method standard errors
 #' @param newdata optional data to average over (default: estimation sample)
 #' @return data.frame of estimates and standard errors
+#' @examples
+#' set.seed(2)
+#' d <- roy_copula_sim(1500, list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6),
+#'                     c(0.8, 1), c(-0.4, 0.5), "clayton")
+#' fit <- roy_copula_fit(y ~ x1, s ~ x1 + z1 + z2, d, family = "clayton")
+#' roy_te(fit)
 #' @export
 roy_te <- function(fit, to = 1, from = 0, se = TRUE, newdata = NULL) {
   fit <- .as_roy_copula(fit)
@@ -138,7 +148,7 @@ roy_te <- function(fit, to = 1, from = 0, se = TRUE, newdata = NULL) {
 
 #' Marginal treatment effect curve MTE(x, u_S)
 #'
-#' MTE(x, u) = x'(beta_to - beta_from) + E[U_to - U_from | U_S = u],
+#' `MTE(x, u) = x'(beta_to - beta_from) + E[U_to - U_from | U_S = u]`,
 #' U_S = 1 - W the unobserved resistance to AI adoption.  For J > 2 (ordered)
 #' this is the MTE along the single latent AI-propensity index.
 #'
@@ -147,6 +157,13 @@ roy_te <- function(fit, to = 1, from = 0, se = TRUE, newdata = NULL) {
 #' @param x covariate vector (default: sample mean of X)
 #' @param to,from regimes compared (MTE of Y_to - Y_from)
 #' @param se delta-method pointwise standard errors
+#' @return A data frame with columns `u`, `mte` and, if `se = TRUE`, `se`, `lower` and `upper` (pointwise 95% interval).
+#' @examples
+#' set.seed(2)
+#' d <- roy_copula_sim(1500, list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6),
+#'                     c(0.8, 1), c(-0.4, 0.5), "clayton")
+#' fit <- roy_copula_fit(y ~ x1, s ~ x1 + z1 + z2, d, family = "clayton")
+#' roy_mte(fit, u = c(0.1, 0.5, 0.9))
 #' @export
 roy_mte <- function(fit, u = seq(0.01, 0.99, by = 0.01), x = colMeans(.as_roy_copula(fit)$X),
                     to = 1, from = 0, se = TRUE) {
@@ -172,14 +189,21 @@ roy_mte <- function(fit, u = seq(0.01, 0.99, by = 0.01), x = colMeans(.as_roy_co
 #' Compares the propensity score under `data_from` and `data_to` (same
 #' people, instrument changed, e.g. AI access z2 from 0 to 1).  The LATE is
 #' the average gain among compliers,
-#'   LATE = sum_i [ (P1_i - P0_i) x_i' dbeta + G(P1_i) - G(P0_i) ] / sum_i (P1_i - P0_i)
-#' with G(P) = E[(U_1 - U_0) 1{U_S <= P}].
+#'   `LATE = sum_i [(P1_i - P0_i) x_i' dbeta + G(P1_i) - G(P0_i)] / sum_i (P1_i - P0_i)`
+#' with `G(P) = E[(U_1 - U_0) 1{U_S <= P}]`.
 #'
 #' @param fit binary "roy_copula" fit
 #' @param instrument name of the instrument column
 #' @param from,to values of the instrument
 #' @param data the estimation data (required)
 #' @param se compute delta-method standard errors
+#' @return A data frame with columns `parameter` (the LATE and the complier share), `estimate` and, if `se = TRUE`, `se`.
+#' @examples
+#' set.seed(2)
+#' d <- roy_copula_sim(1500, list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6),
+#'                     c(0.8, 1), c(-0.4, 0.5), "clayton")
+#' fit <- roy_copula_fit(y ~ x1, s ~ x1 + z1 + z2, d, family = "clayton")
+#' roy_late(fit, "z2", data = d)
 #' @export
 roy_late <- function(fit, instrument, from = 0, to = 1, data = NULL, se = TRUE) {
   fit <- .as_roy_copula(fit)
@@ -226,6 +250,11 @@ roy_late <- function(fit, instrument, from = 0, to = 1, data = NULL, se = TRUE) 
 #' @param to,from regimes compared (Y_to - Y_from)
 #' @param link "probit" or "logit"
 #' @return named vector of true treatment parameters
+#' @examples
+#' set.seed(1)
+#' cov <- data.frame(x1 = rnorm(5000), z1 = rnorm(5000), z2 = rbinom(5000, 1, 0.5))
+#' roy_te_truth(list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6), c(0.8, 1),
+#'              c(-0.3, 0.4), "clayton", covariates = cov, instrument = "z2")
 #' @export
 roy_te_truth <- function(beta, gamma, sigma, tau, family, nu = NULL,
                          kappa = NULL, covariates, instrument = NULL,

@@ -14,19 +14,21 @@ A named list of character vectors.
 }
 \description{
 Names of the PIAAC Cycle 2 public-use-file (PUF) variables used by
-[piaac_onet_prep()], confirmed against the OECD Cycle 2 international
+\code{\link[=piaac_onet_prep]{piaac_onet_prep()}}, confirmed against the OECD Cycle 2 international
 codebook. Each element is a vector of candidates tried in order (the Cycle 2
 name first, then the Cycle 1 name), so the same code also reads Cycle 1
-files. The names used are reported in the `variables` attribute of the
-prepared data. Override any element, e.g. `piaac_varmap(earnings =
-"EARNHRPPPC2")` to use earnings without bonuses.
+files. The names used are reported in the \code{variables} attribute of the
+prepared data. Override any element, e.g. \code{piaac_varmap(earnings = "EARNHRPPPC2")} to use earnings without bonuses.
 }
 \details{
-Notes from the codebook: `ISCO2C` is the 2-digit ISCO-08 code of the
-current job; `EARNHRBONUSPPPC2` is hourly earnings including bonuses for
-wage and salary earners in PPP-corrected US dollars; `ICTWORKC2` is the
-index of ICT use at work; `AGE_R` is suppressed in 15 PUFs, so
-`AGEG10LFS` (10-year bands) is used as a fallback; plausible values run
-from 1 to 10; replicate weights are `SPFWT1`-`SPFWT80` with the method in
-`VEMETHOD`.
+Notes from the codebook: \code{ISCO2C} is the 2-digit ISCO-08 code of the
+current job; \code{EARNHRBONUSPPPC2} is hourly earnings including bonuses for
+wage and salary earners in PPP-corrected US dollars; \code{ICTWORKC2} is the
+index of ICT use at work; \code{AGE_R} is suppressed in 15 PUFs, so
+\code{AGEG10LFS} (10-year bands) is used as a fallback; plausible values run
+from 1 to 10; replicate weights are \code{SPFWT1}-\code{SPFWT80} with the method in
+\code{VEMETHOD}.
+}
+\examples{
+str(piaac_varmap())
 }

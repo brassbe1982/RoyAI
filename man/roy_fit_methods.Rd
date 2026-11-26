@@ -34,19 +34,30 @@
 )
 }
 \arguments{
-\item{object, x}{A `roy_fit` object.}
+\item{object, x}{A \code{roy_fit} object.}
 
-\item{part}{For `coef()`: `"all"` (natural-scale parameter vector) or one
-of `"selection"`, `"outcome"`, `"sigma"`, `"dependence"`, `"correction"`.}
+\item{part}{For \code{coef()}: \code{"all"} (natural-scale parameter vector) or one
+of \code{"selection"}, \code{"outcome"}, \code{"sigma"}, \code{"dependence"}, \code{"correction"}.}
 
 \item{...}{Unused.}
 
 \item{newdata}{Optional data frame.}
 
-\item{type}{For `predict()`: `"observed"` (\eqn{E[Y \mid X, Z, S]} for
-the observed regime; needs the selection variable), `"potential"`
-(matrix of unconditional potential outcomes) or `"propensity"`.}
+\item{type}{For \code{predict()}: \code{"observed"} (\eqn{E[Y \mid X, Z, S]} for
+the observed regime; needs the selection variable), \code{"potential"}
+(matrix of unconditional potential outcomes) or \code{"propensity"}.}
+}
+\value{
+\code{coef()} a named numeric vector, \code{vcov()} a matrix, \code{logLik()} an object of class \code{logLik}, \code{nobs()} an integer, \code{summary()} an object of class \code{summary.roy_fit}, \code{predict()} a numeric vector or matrix of predictions; the \code{print} methods return their argument invisibly.
 }
 \description{
 Methods for fitted Roy models
+}
+\examples{
+dat <- roy_sim_A(n = 1500, seed = 1)
+fit <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+coef(fit)
+sqrt(diag(vcov(fit)))[1:3]
+logLik(fit); nobs(fit)
+head(predict(fit))
 }

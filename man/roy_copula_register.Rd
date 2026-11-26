@@ -6,6 +6,13 @@
 \usage{
 roy_copula_register()
 }
+\value{
+The names of the registered dependence families, invisibly; called for its side effect of registering the copula families.
+}
 \description{
 Register the copula families with the RoyAI core (called from .onLoad)
+}
+\examples{
+roy_copula_register()
+roy_dependence_families()
 }

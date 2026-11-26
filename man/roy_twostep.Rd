@@ -25,3 +25,14 @@ Step 1: ordered probit (or MNL) for selection.  Step 2: OLS of Y on X and
 the generalized inverse Mills ratio within each regime.  Returns beta,
 sigma, the implied Gaussian-copula tau, and the selection parameters.
 }
+\examples{
+set.seed(2)
+d <- roy_copula_sim(1000, list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6),
+                    c(0.8, 1), c(-0.4, 0.5), "gaussian")
+X <- cbind(1, d$x1); Z <- cbind(1, d$x1, d$z1, d$z2)
+sp <- list(kx = list(k = 2, names = c("(Intercept)", "x1")),
+           kz = list(k = 4, names = c("(Intercept)", "x1", "z1", "z2")),
+           J = 2, family = "gaussian", fix_nu = NULL, type = "ordered",
+           link = "probit")
+roy_twostep(d$y, X, Z, d$s, sp)
+}

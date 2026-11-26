@@ -14,6 +14,11 @@
 #' @return An object of class `roy_selection` with `coef` (vector for Model A,
 #'   `ncol(Z)` x `(J-1)` matrix for Model B), `vcov`, `prob` (n x J matrix of
 #'   fitted choice probabilities), `loglik` and `type`.
+#' @examples
+#' dat <- roy_sim_A(n = 1000, seed = 1)
+#' spec <- roy_spec(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+#' sel <- roy_select(spec)
+#' sel
 #' @export
 roy_select <- function(spec, control = list()) {
   stopifnot(inherits(spec, "roy_spec"))
@@ -108,6 +113,11 @@ roy_imr <- function(index, d) {
 }
 
 #' @rdname roy_imr
+#' @examples
+#' roy_imr(c(-1, 0, 1), d = c(1, 0, 1))
+#' P <- matrix(c(0.5, 0.3, 0.2, 0.2, 0.5, 0.3), nrow = 2, byrow = TRUE)
+#' roy_dmf_terms(P, s = 1)
+#' roy_lee_terms(P, s = 1)
 #' @export
 roy_dmf_terms <- function(P, s) {
   P <- pmin(pmax(P, 1e-12), 1 - 1e-12)
@@ -129,6 +139,10 @@ roy_lee_terms <- function(P, s) {
 #' @param fit A `roy_fit` object.
 #' @param newdata Optional data frame.
 #' @return n x J matrix of probabilities of each regime.
+#' @examples
+#' dat <- roy_sim_A(n = 1500, seed = 1)
+#' fit <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+#' head(roy_propensity(fit))
 #' @export
 roy_propensity <- function(fit, newdata = NULL) {
   Z <- .design_new(fit$spec, newdata)$Z

@@ -12,10 +12,15 @@ piaac_example(n = 3000, seed = 1)
 \item{seed}{Random seed.}
 }
 \value{
-A list with `piaac` and `exposure` data frames.
+A list with \code{piaac} and \code{exposure} data frames.
 }
 \description{
-Generates fake respondents with the column names of [piaac_varmap()] and a
+Generates fake respondents with the column names of \code{\link[=piaac_varmap]{piaac_varmap()}} and a
 matching fake exposure table. The numbers are synthetic and carry no
 information about any country.
+}
+\examples{
+ex <- piaac_example(n = 500)
+dim(ex$piaac)
+head(ex$exposure)
 }

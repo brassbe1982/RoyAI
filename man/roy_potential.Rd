@@ -7,28 +7,34 @@
 roy_potential(fit, regime, given = NULL, newdata = NULL, coef_list = NULL)
 }
 \arguments{
-\item{fit}{A `roy_fit` object.}
+\item{fit}{A \code{roy_fit} object.}
 
 \item{regime}{Potential outcome to predict (0-based regime code).}
 
-\item{given}{Conditioning regime, or `NULL` for the unconditional mean.}
+\item{given}{Conditioning regime, or \code{NULL} for the unconditional mean.}
 
 \item{newdata}{Optional data frame (defaults to the estimation sample).}
 
-\item{coef_list}{Internal: coefficient list to use instead of `fit$coef`.}
+\item{coef_list}{Internal: coefficient list to use instead of \code{fit$coef}.}
 }
 \value{
 Numeric vector.
 }
 \description{
-Returns \eqn{E[Y_s \mid X]} (`given = NULL`) or
-\eqn{E[Y_s \mid X, Z, S = k]} (`given = k`) for every row. With
-`regime != given` this is the counterfactual mean that the Roy model is
+Returns \eqn{E[Y_s \mid X]} (\code{given = NULL}) or
+\eqn{E[Y_s \mid X, Z, S = k]} (\code{given = k}) for every row. With
+\code{regime != given} this is the counterfactual mean that the Roy model is
 built to recover: what an adopter would have earned without AI, and so on.
 }
 \details{
 For Model A with a non-Gaussian dependence family the conditional mean is
 integrated numerically from the family's h-function. For Model B the
-counterfactual means require `correction = "dmf"`; with Lee's correction
-only own-regime conditional means are identified and `NA` is returned.
+counterfactual means require \code{correction = "dmf"}; with Lee's correction
+only own-regime conditional means are identified and \code{NA} is returned.
+}
+\examples{
+dat <- roy_sim_A(n = 1500, seed = 1)
+fit <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+head(roy_potential(fit, regime = 1))           # E[Y1 | X]
+head(roy_potential(fit, regime = 1, given = 0)) # E[Y1 | X, Z, D = 0]
 }

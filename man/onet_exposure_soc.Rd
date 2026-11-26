@@ -7,26 +7,35 @@
 onet_exposure_soc(aioe, gpt, complementarity, soc_xwalk = NULL)
 }
 \arguments{
-\item{aioe}{Data frame with columns `SOC Code` and `AIOE` (Appendix A of
-`AIOE_DataAppendix.xlsx`).}
+\item{aioe}{Data frame with columns \verb{SOC Code} and \code{AIOE} (Appendix A of
+\code{AIOE_DataAppendix.xlsx}).}
 
-\item{gpt}{Data frame read from `data/occ_level.csv` of the GPTs-are-GPTs
-repository (`O*NET-SOC Code`, `dv_rating_beta`, `human_rating_beta`).}
+\item{gpt}{Data frame read from \code{data/occ_level.csv} of the GPTs-are-GPTs
+repository (\verb{O*NET-SOC Code}, \code{dv_rating_beta}, \code{human_rating_beta}).}
 
-\item{complementarity}{Output of [onet_complementarity()].}
+\item{complementarity}{Output of \code{\link[=onet_complementarity]{onet_complementarity()}}.}
 
 \item{soc_xwalk}{Optional SOC 2010-2018 crosswalk from
-[read_soc_2010_2018()]. When supplied, the GPT and complementarity
+\code{\link[=read_soc_2010_2018]{read_soc_2010_2018()}}. When supplied, the GPT and complementarity
 measures (SOC 2018 based) are converted to SOC 2010 to match the AIOE and
 the ISCO crosswalk; otherwise codes are matched as they are.}
 }
 \value{
-Data frame with `soc`, `aioe`, `gpt_beta`, `gpt_beta_human`,
-  `complementarity`.
+Data frame with \code{soc}, \code{aioe}, \code{gpt_beta}, \code{gpt_beta_human},
+\code{complementarity}.
 }
 \description{
 Merges the Felten-Raj-Seamans AIOE (6-digit SOC 2010), the Eloundou et
 al. GPT-exposure ratings (O*NET-SOC 2019, averaged to 6 digits) and the
-complementarity score from [onet_complementarity()] into one table ready
-for [onet_to_isco2()].
+complementarity score from \code{\link[=onet_complementarity]{onet_complementarity()}} into one table ready
+for \code{\link[=onet_to_isco2]{onet_to_isco2()}}.
+}
+\examples{
+aioe <- data.frame(`SOC Code` = c("11-1011", "43-9021"), AIOE = c(1.2, -0.4),
+                   check.names = FALSE)
+gpt <- data.frame(`O*NET-SOC Code` = c("11-1011.00", "43-9021.00"),
+                  dv_rating_beta = c(0.5, 0.8), human_rating_beta = c(0.4, 0.7),
+                  check.names = FALSE)
+comp <- data.frame(soc = c("11-1011", "43-9021"), complementarity = c(0.7, 0.3))
+onet_exposure_soc(aioe, gpt, comp)
 }

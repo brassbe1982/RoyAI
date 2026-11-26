@@ -22,10 +22,10 @@ roy_continuous_sim(
 
 \item{beta_x}{outcome coefficients on (1, x1)}
 
-\item{beta_a}{dose coefficients on (a, a^2); `beta_a[2] < 0` gives
+\item{beta_a}{dose coefficients on (a, a^2); \code{beta_a[2] < 0} gives
 diminishing returns}
 
-\item{alpha}{coefficients of `log sigma(a)` on (1, a)}
+\item{alpha}{coefficients of \verb{log sigma(a)} on (1, a)}
 
 \item{gamma}{selection coefficients on (1, x1, z1, z2)}
 
@@ -35,19 +35,25 @@ diminishing returns}
 
 \item{nu}{t-copula degrees of freedom}
 
-\item{link}{`"exp"` or `"tanh"`}
+\item{link}{\code{"exp"} or \code{"tanh"}}
 
 \item{covariates}{optional data.frame with x1, z1, z2}
 }
 \value{
-data.frame with `y`, `a`, covariates, `eps`, `v` and the
-  potential-outcome function is recoverable from the true parameters
+data.frame with \code{y}, \code{a}, covariates, \code{eps}, \code{v} and the
+potential-outcome function is recoverable from the true parameters
 }
 \description{
-Draws covariates `x1 ~ N(0,1)`, `z1 ~ N(0,1)`, `z2 ~ Bernoulli(0.5)`,
-a latent propensity `Z'gamma + V` on `Z = (1, x1, z1, z2)`, intensity
-`A = Lambda(Z'gamma + V)` when positive and 0 otherwise, and outcomes
-`Y = b0 + b1 x1 + beta_a[1] a + beta_a[2] a^2 + exp(alpha[1] + alpha[2] a) eps`
-with copula `family` and Kendall's `tau` between `Phi(eps)` and `Phi(V)`.
-The default `gamma` gives about 30 percent non-users.
+Draws covariates \code{x1 ~ N(0,1)}, \code{z1 ~ N(0,1)}, \code{z2 ~ Bernoulli(0.5)},
+a latent propensity \verb{Z'gamma + V} on \verb{Z = (1, x1, z1, z2)}, intensity
+\verb{A = Lambda(Z'gamma + V)} when positive and 0 otherwise, and outcomes
+\verb{Y = b0 + b1 x1 + beta_a[1] a + beta_a[2] a^2 + exp(alpha[1] + alpha[2] a) eps}
+with copula \code{family} and Kendall's \code{tau} between \code{Phi(eps)} and \code{Phi(V)}.
+The default \code{gamma} gives about 30 percent non-users.
+}
+\examples{
+set.seed(1)
+d <- roy_continuous_sim(500, tau = 0.4, family = "clayton")
+summary(d$a)
+mean(d$a == 0)   # share of non-users
 }

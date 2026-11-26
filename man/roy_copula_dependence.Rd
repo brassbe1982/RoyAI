@@ -10,11 +10,16 @@ roy_copula_dependence()
 named list of roy_dependence objects
 }
 \description{
-Builds [roy_dependence()] objects for the Clayton, Gumbel, Frank and
-Student-t copulas so that `roy(..., dependence = "clayton")` estimates
+Builds \code{\link[=roy_dependence]{roy_dependence()}} objects for the Clayton, Gumbel, Frank and
+Student-t copulas so that \code{roy(..., dependence = "clayton")} estimates
 Model A through the core.  The dependence parameter is Kendall's tau
 (t copula: tau and nu), so families are directly comparable.  Negative
 tau for Clayton/Gumbel uses the 90-degree rotation; the core simulator
 assumes exchangeable copulas, so simulate rotated cases with
-[roy_copula_sim()].
+\code{\link[=roy_copula_sim]{roy_copula_sim()}}.
+}
+\examples{
+deps <- roy_copula_dependence()
+names(deps)
+deps$clayton
 }

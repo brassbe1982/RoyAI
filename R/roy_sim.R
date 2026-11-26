@@ -39,6 +39,10 @@
 #' @return A data frame with `y`, `d`, `x1`, `x2`, `z`, the latent `y0`,
 #'   `y1`, and attribute `"truth"` holding the true parameter vector named as
 #'   in `coef(roy(...))`.
+#' @examples
+#' dat <- roy_sim_A(n = 1000, seed = 1)
+#' head(dat)
+#' attr(dat, "truth")
 #' @export
 roy_sim_A <- function(n = 2000, beta0 = c(1, 0.5, 0.3), beta1 = c(1.4, 0.8, 0.3),
                       gamma = c(-0.2, 0.4, 0.2, 0.8), sigma0 = 1, sigma1 = 1.2,
@@ -87,6 +91,9 @@ roy_sim_A <- function(n = 2000, beta0 = c(1, 0.5, 0.3), beta1 = c(1.4, 0.8, 0.3)
 #' @param rho01 Correlation of (U0, U1).
 #' @param pi Cost coefficient on `w`.
 #' @return A data frame with attribute `"truth"`.
+#' @examples
+#' dat <- roy_sim_classical(n = 1000, seed = 1)
+#' mean(dat$d)
 #' @export
 roy_sim_classical <- function(n = 2000, beta0 = c(1, 0.5, 0.3), beta1 = c(1.2, 0.9, 0.1),
                               sigma0 = 1, sigma1 = 1.3, rho01 = 0.3, pi = 0, seed = NULL) {
@@ -129,6 +136,9 @@ roy_sim_classical <- function(n = 2000, beta0 = c(1, 0.5, 0.3), beta1 = c(1.2, 0
 #' @param seed Optional random seed.
 #' @return A data frame with `y`, `s`, `x1`, `x2`, `z1`, `z2`, latent `y0`,
 #'   `y1`, `y2`, and attribute `"truth"`.
+#' @examples
+#' dat <- roy_sim_B(n = 1500, seed = 1)
+#' table(dat$s)
 #' @export
 roy_sim_B <- function(n = 3000,
                       beta = list(c(1, 0.5, 0.3), c(1.3, 0.8, 0.3), c(1.1, 1.0, 0.1)),

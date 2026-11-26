@@ -7,25 +7,30 @@
 roy_dynamic_solve(par, T, beta = 0.95, grid = NULL, gh = 15)
 }
 \arguments{
-\item{par}{list with `sd_k`, `sigma_e`, `psi`, `lambda`
+\item{par}{list with \code{sd_k}, \code{sigma_e}, \code{psi}, \code{lambda}
 (other elements are ignored)}
 
 \item{T}{horizon}
 
 \item{beta}{discount factor}
 
-\item{grid}{grid of net expected gains `m - c`; default spans the prior}
+\item{grid}{grid of net expected gains \code{m - c}; default spans the prior}
 
 \item{gh}{number of Gauss-Hermite nodes}
 }
 \value{
-list with `grid`, `dv` (array `T x (T+1) x length(grid)` of
-  `v_1 - v_0`), `Vbar` (expected value functions) and inputs
+list with \code{grid}, \code{dv} (array \verb{T x (T+1) x length(grid)} of
+\code{v_1 - v_0}), \code{Vbar} (expected value functions) and inputs
 }
 \description{
 Solves the finite-horizon dynamic Roy model of the monograph (Section 5.5)
 for two arrangements with Bayesian learning about complementarity and
-learning by doing. The state is `(t, n, m - c)`: period, number of past AI
+learning by doing. The state is \verb{(t, n, m - c)}: period, number of past AI
 periods (which fixes the posterior variance) and the expected net current
 gain. Expectations over the next signal use Gauss-Hermite quadrature.
+}
+\examples{
+sol <- roy_dynamic_solve(list(sd_k = 0.25, sigma_e = 0.3, psi = 0.05,
+                              lambda = 0.1), T = 5)
+dim(sol$dv)
 }

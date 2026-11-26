@@ -6,7 +6,15 @@
 \alias{RoyAI-package}
 \title{RoyAI: Generalized Roy Models of Human-AI Complementarity and Endogenous Selection}
 \description{
-Estimation, simulation and diagnostics for generalized Roy (1951) selection models applied to the allocation of work across human-only, AI-augmented and AI-dominant production. Model A is a binary AI-adoption Roy model with endogenous selection (Heckman two-step and full maximum likelihood, with the classical Roy model as a parameter restriction). Model B is a multinomial Roy model with three production arrangements, estimated by multinomial-logit selection correction (Dubin-McFadden as modified by Bourguignon, Fournier and Gurgand 2007, or Lee 1983). Model C is the copula generalized Roy model. Model D is a copula Roy model for continuous AI-use intensity with a mass of non-users, estimated by maximum likelihood. Model E is a dynamic Roy model in which workers learn their complementarity with AI by Bayesian updating and acquire it by doing, solved by backward induction and estimated by nested fixed point or conditional choice probabilities (Hotz and Miller 1993). Dependence between selection and outcome disturbances is supplied by pluggable dependence families, so copula families and treatment-effect modules can be registered by extension code. The framework builds on Niankara et al. (2025) \doi{10.1109/GCET68529.2025.11450624}.
+Estimation, simulation and diagnostics for generalized Roy (1951) \doi{10.1093/oxfordjournals.oep.a041827} selection models applied to the allocation of work across human-only, AI-augmented and AI-dominant production. Model A is a binary AI-adoption Roy model with endogenous selection (Heckman two-step and full maximum likelihood, with the classical Roy model as a parameter restriction). Model B is a multinomial Roy model with three production arrangements, estimated by multinomial-logit selection correction (Dubin-McFadden as modified by Bourguignon, Fournier and Gurgand (2007) \doi{10.1111/j.1467-6419.2007.00466.x}, or Lee (1983) \doi{10.2307/1912003}). Model C is the copula generalized Roy model. Model D is a copula Roy model for continuous AI-use intensity with a mass of non-users, estimated by maximum likelihood. Model E is a dynamic Roy model in which workers learn their complementarity with AI by Bayesian updating and acquire it by doing, solved by backward induction and estimated by nested fixed point or conditional choice probabilities (Hotz and Miller (1993) \doi{10.2307/2298122}). Dependence between selection and outcome disturbances is supplied by pluggable dependence families, so copula families and treatment-effect modules can be registered by extension code. The framework builds on Niankara et al. (2025) \doi{10.1109/GCET68529.2025.11450624}.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/brassbe1982/RoyAI}
+  \item Report bugs at \url{https://github.com/brassbe1982/RoyAI/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Ibrahim Niankara \email{Ibrahim.niankara@aau.ac.ae}

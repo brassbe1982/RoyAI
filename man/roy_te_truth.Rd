@@ -35,7 +35,7 @@ roy_te_truth(
 \item{kappa}{interior cutpoints beyond 0 (J > 2)}
 
 \item{covariates}{data.frame of covariates to average over (columns in the
-order used by [roy_copula_sim()])}
+order used by \code{\link[=roy_copula_sim]{roy_copula_sim()}})}
 
 \item{instrument}{optional name of a binary instrument for the LATE (0 -> 1)}
 
@@ -49,4 +49,10 @@ named vector of true treatment parameters
 \description{
 Used by the Monte Carlo study: evaluates ATE/ATT/ATU/LATE at the true
 structural parameters, averaging over a large covariate sample.
+}
+\examples{
+set.seed(1)
+cov <- data.frame(x1 = rnorm(5000), z1 = rnorm(5000), z2 = rbinom(5000, 1, 0.5))
+roy_te_truth(list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6), c(0.8, 1),
+             c(-0.3, 0.4), "clayton", covariates = cov, instrument = "z2")
 }

@@ -42,12 +42,20 @@ type = "mnl" a matrix with one column per regime 1..J-1}
 
 \item{covariates}{data.frame of covariates; default x1 ~ N(0,1),
 z1 ~ N(0,1), z2 ~ Bernoulli(0.5).  Columns are taken in order:
-X uses the first length(beta[[1]]) - 1 columns, Z the first nrow(gamma) - 1.}
+X uses the first \code{length(beta[[1]]) - 1} columns, Z the first \code{nrow(gamma) - 1}.}
 }
 \value{
 data.frame with y, s (observed regime), potential outcomes
-  y0..y{J-1}, selection uniform(s) and covariates
+y0..y{J-1}, selection uniform(s) and covariates
 }
 \description{
 Simulate from the copula generalized Roy model (Model C)
+}
+\examples{
+set.seed(1)
+d <- roy_copula_sim(1000, beta = list(c(0.5, 0.3), c(1, 0.5)),
+                    gamma = c(0.2, 0.3, 0.8, 0.6), sigma = c(0.8, 1),
+                    tau = c(-0.3, 0.4), family = "frank")
+table(d$s)
+mean(d$y1 - d$y0)
 }

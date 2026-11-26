@@ -7,18 +7,18 @@
 roy_spec(outcome, selection, data, regimes = NULL)
 }
 \arguments{
-\item{outcome}{Formula for the potential outcomes, e.g. `y ~ x1 + x2`.
+\item{outcome}{Formula for the potential outcomes, e.g. \code{y ~ x1 + x2}.
 The same regressors enter every regime equation (\eqn{Y_s = X'\beta_s + U_s}).}
 
-\item{selection}{Formula for selection, e.g. `d ~ x1 + x2 + z1`. Variables
-that appear here but not in `outcome` are the exclusion restrictions.}
+\item{selection}{Formula for selection, e.g. \code{d ~ x1 + x2 + z1}. Variables
+that appear here but not in \code{outcome} are the exclusion restrictions.}
 
 \item{data}{A data frame.}
 
 \item{regimes}{Optional labels for the regimes, in order.}
 }
 \value{
-An object of class `roy_spec`.
+An object of class \code{roy_spec}.
 }
 \description{
 Builds the design matrices shared by all RoyAI estimators. The number of
@@ -26,4 +26,8 @@ distinct values of the selection variable decides the model: two values
 give Model A (binary AI adoption), three or more give Model B
 (multinomial production arrangements; by convention 0 = human-only,
 1 = AI-augmented, 2 = AI-dominant).
+}
+\examples{
+dat <- roy_sim_A(n = 500, seed = 1)
+roy_spec(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
 }

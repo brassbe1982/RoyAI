@@ -27,6 +27,8 @@
 #'
 #' @param ... Elements to override (character vectors).
 #' @return A named list of character vectors.
+#' @examples
+#' str(piaac_varmap())
 #' @export
 piaac_varmap <- function(...) {
   def <- list(
@@ -58,6 +60,8 @@ piaac_varmap <- function(...) {
 #' Slovak Republic have no valid hourly earnings. That leaves these six.
 #'
 #' @return A data frame with ISO3 code, numeric `CNTRYID` and country name.
+#' @examples
+#' piaac_analysis_countries()
 #' @export
 piaac_analysis_countries <- function() {
   data.frame(iso3 = c("CHL", "CZE", "FRA", "ISR", "LVA", "POL"),
@@ -90,6 +94,14 @@ piaac_analysis_countries <- function() {
 #'   e.g. `piaac_analysis_countries()$iso3`.
 #' @param columns Optional subset of columns to keep.
 #' @return A data frame.
+#' @examples
+#' ex <- piaac_example(n = 200)
+#' dir <- file.path(tempdir(), "puf")
+#' dir.create(dir, showWarnings = FALSE)
+#' utils::write.csv2(ex$piaac, file.path(dir, "prgchlp2.csv"), row.names = FALSE)
+#' puf <- read_piaac_puf(dir, countries = "chl")
+#' dim(puf)
+#' unlink(dir, recursive = TRUE)
 #' @export
 read_piaac_puf <- function(folder, countries = NULL, columns = NULL) {
   files <- list.files(folder, pattern = "^prg.*p2\\.csv$", full.names = TRUE, ignore.case = TRUE)
@@ -134,6 +146,11 @@ read_piaac_puf <- function(folder, countries = NULL, columns = NULL) {
 #' @param measures Names of the measure columns to aggregate.
 #' @param weight Optional name of an employment-weight column in `exposure`.
 #' @return Data frame with `isco08_2d` and the averaged measures.
+#' @examples
+#' cw <- isco_soc_crosswalk()
+#' set.seed(1)
+#' ex <- data.frame(soc = unique(cw$soc), aioe = rnorm(length(unique(cw$soc))))
+#' head(onet_to_isco2(ex, measures = "aioe"))
 #' @export
 onet_to_isco2 <- function(exposure, crosswalk = isco_soc_crosswalk(), measures, weight = NULL) {
   stopifnot(all(c("soc") %in% names(exposure)), all(c("soc", "isco08") %in% names(crosswalk)))
@@ -202,6 +219,10 @@ onet_to_isco2 <- function(exposure, crosswalk = isco_soc_crosswalk(), measures, 
 #'   `skill_num`, `skill_aps`, `age`, `age2`, `female`, `schooling`, `ict_work`,
 #'   `isco08_2d`, `ai_exposure`, `complementarity`, `d`, `s`; attribute `notes`
 #'   lists the assumptions used.
+#' @examples
+#' ex <- piaac_example(n = 1000)
+#' d <- piaac_onet_prep(ex$piaac, ex$exposure)
+#' head(d)
 #' @export
 piaac_onet_prep <- function(piaac, exposure, varmap = piaac_varmap(), pv = 1,
                             thresholds = list(exposure = 0.5, ict = 2 / 3, complementarity = 0.5),
@@ -314,6 +335,10 @@ piaac_onet_prep <- function(piaac, exposure, varmap = piaac_varmap(), pv = 1,
 #' @param n Number of respondents.
 #' @param seed Random seed.
 #' @return A list with `piaac` and `exposure` data frames.
+#' @examples
+#' ex <- piaac_example(n = 500)
+#' dim(ex$piaac)
+#' head(ex$exposure)
 #' @export
 piaac_example <- function(n = 3000, seed = 1) {
   set.seed(seed)
@@ -354,6 +379,23 @@ piaac_example <- function(n = 3000, seed = 1) {
 #' @param job_zones Data frame read from O*NET `job_zones.csv`.
 #' @return Data frame with `soc` (6-digit, "XX-XXXX"), the six components and
 #'   `complementarity`.
+#' @examples
+#' items <- c("Face-to-Face Discussions with Individuals and Within Teams",
+#'   "Public Speaking", "Health and Safety of Other Workers",
+#'   "Work Outcomes and Results of Other Workers",
+#'   "Outdoors, Exposed to All Weather Conditions", "Physical Proximity",
+#'   "Consequence of Error", "Freedom to Make Decisions",
+#'   "Frequency of Decision Making", "Determine Tasks, Priorities and Goals",
+#'   "Degree of Automation", "Importance of Repeating Same Tasks")
+#' g <- expand.grid(code = c("11-1011.00", "43-9021.00"), item = items,
+#'                  stringsAsFactors = FALSE)
+#' set.seed(1)
+#' work_context <- data.frame(`O*NET-SOC Code` = g$code, `Element Name` = g$item,
+#'                            `Scale ID` = "CX", `Data Value` = runif(nrow(g), 1, 5),
+#'                            check.names = FALSE)
+#' job_zones <- data.frame(`O*NET-SOC Code` = c("11-1011.00", "43-9021.00"),
+#'                         `Job Zone` = c(5, 2), check.names = FALSE)
+#' onet_complementarity(work_context, job_zones)
 #' @export
 onet_complementarity <- function(work_context, job_zones) {
   wc <- work_context[work_context[["Scale ID"]] == "CX", ]
@@ -404,6 +446,14 @@ onet_complementarity <- function(work_context, job_zones) {
 #'   the ISCO crosswalk; otherwise codes are matched as they are.
 #' @return Data frame with `soc`, `aioe`, `gpt_beta`, `gpt_beta_human`,
 #'   `complementarity`.
+#' @examples
+#' aioe <- data.frame(`SOC Code` = c("11-1011", "43-9021"), AIOE = c(1.2, -0.4),
+#'                    check.names = FALSE)
+#' gpt <- data.frame(`O*NET-SOC Code` = c("11-1011.00", "43-9021.00"),
+#'                   dv_rating_beta = c(0.5, 0.8), human_rating_beta = c(0.4, 0.7),
+#'                   check.names = FALSE)
+#' comp <- data.frame(soc = c("11-1011", "43-9021"), complementarity = c(0.7, 0.3))
+#' onet_exposure_soc(aioe, gpt, comp)
 #' @export
 onet_exposure_soc <- function(aioe, gpt, complementarity, soc_xwalk = NULL) {
   a <- data.frame(soc = substr(aioe[["SOC Code"]], 1, 7), aioe = as.numeric(aioe[["AIOE"]]))
@@ -431,6 +481,9 @@ onet_exposure_soc <- function(aioe, gpt, complementarity, soc_xwalk = NULL) {
 #' used instead by passing it to [onet_to_isco2()].
 #'
 #' @return Data frame with `isco08`, `soc` (SOC 2010, "XX-XXXX"), and labels.
+#' @examples
+#' cw <- isco_soc_crosswalk()
+#' head(cw[, c("isco08", "soc")])
 #' @export
 isco_soc_crosswalk <- function() {
   x <- utils::read.csv(system.file("extdata", "isco08_soc10.csv", package = "RoyAI"),
@@ -450,6 +503,11 @@ isco_soc_crosswalk <- function() {
 #' @param xwalk Data frame with columns `soc2010` and `soc2018`.
 #' @param measures Measure columns to convert.
 #' @return Data frame with `soc` (SOC 2010) and the averaged measures.
+#' @examples
+#' xw <- data.frame(soc2010 = c("15-1131", "15-1131", "43-9021"),
+#'                  soc2018 = c("15-1251", "15-1252", "43-9021"))
+#' x <- data.frame(soc = c("15-1251", "15-1252", "43-9021"), gpt = c(0.6, 0.8, 0.9))
+#' soc18_to_soc10(x, xw, "gpt")
 #' @export
 soc18_to_soc10 <- function(x, xwalk, measures) {
   m <- merge(xwalk[, c("soc2010", "soc2018")], x[, c("soc", measures)], by.x = "soc2018", by.y = "soc")
@@ -462,6 +520,11 @@ soc18_to_soc10 <- function(x, xwalk, measures) {
 #'
 #' @param path Path to `soc_2010_to_2018_crosswalk.xlsx` from BLS.
 #' @return Data frame with `soc2010` and `soc2018`.
+#' @examples
+#' \dontrun{
+#' # needs soc_2010_to_2018_crosswalk.xlsx from the U.S. Bureau of Labor Statistics
+#' xw <- read_soc_2010_2018("soc_2010_to_2018_crosswalk.xlsx")
+#' }
 #' @export
 read_soc_2010_2018 <- function(path) {
   if (!requireNamespace("readxl", quietly = TRUE)) stop("install the 'readxl' package")
@@ -484,6 +547,11 @@ read_soc_2010_2018 <- function(path) {
 #' @param dest Destination folder.
 #' @param base Base URL of the Cycle 2 CSV folder.
 #' @return Paths of the CSV files, invisibly.
+#' @examples
+#' \dontrun{
+#' # needs an internet connection; downloads one country file of several MB
+#' files <- download_piaac_puf("CHL", dest = tempdir())
+#' }
 #' @export
 download_piaac_puf <- function(countries = piaac_analysis_countries()$iso3, dest = ".",
                                base = "https://webfs.oecd.org/piaac/cy2-puf-data/CSV/") {

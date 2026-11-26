@@ -41,12 +41,12 @@ across regimes are not available when J > 2)}
 \item{start}{optional starting values (unconstrained scale)}
 
 \item{multistart}{maximise from several starts and keep the best regular
-maximum. `NULL` (default) means `TRUE` for non-Gaussian families when
-`start` is not given. Starts: the two-step values, independence (all
+maximum. \code{NULL} (default) means \code{TRUE} for non-Gaussian families when
+\code{start} is not given. Starts: the two-step values, independence (all
 tau = 0) and the two-step taus with flipped signs. Copula likelihoods are
 often bimodal in the sign of tau and can spike as |tau| -> 1; a run is
 kept only if it is a regular maximum (positive definite Hessian, max
-|score| <= 1, every |tau| <= 0.98). Runs are stored in `fit$multistart`.}
+|score| <= 1, every |tau| <= 0.98). Runs are stored in \code{fit$multistart}.}
 
 \item{hessian}{compute the observed-information covariance matrix}
 
@@ -57,4 +57,11 @@ object of class "roy_copula"
 }
 \description{
 Fit the copula generalized Roy model (Model C) by maximum likelihood
+}
+\examples{
+set.seed(2)
+d <- roy_copula_sim(1500, list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6),
+                    c(0.8, 1), c(-0.4, 0.5), "clayton")
+fit <- roy_copula_fit(y ~ x1, s ~ x1 + z1 + z2, d, family = "clayton")
+coef(fit)[c("tau0", "tau1")]
 }

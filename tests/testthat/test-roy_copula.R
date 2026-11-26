@@ -25,6 +25,7 @@ test_that("Gaussian conditional mean matches the closed form", {
 })
 
 test_that("analytic ATE/ATT/ATU/LATE match a large simulation", {
+  skip_on_cran()  # slow (> 3 s); runs when NOT_CRAN = "true"
   set.seed(5)
   B <- list(c(0.5, 0.3), c(1, 0.5)); G <- c(0.2, 0.3, 0.8, 0.6)
   n <- 2e5
@@ -40,6 +41,7 @@ test_that("analytic ATE/ATT/ATU/LATE match a large simulation", {
 })
 
 test_that("FIML recovers Model C parameters (binary and ordered J = 3)", {
+  skip_on_cran()  # slow (> 3 s); runs when NOT_CRAN = "true"
   set.seed(2)
   d <- roy_copula_sim(3000, list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6),
                       c(0.8, 1), c(-0.4, 0.5), "clayton")
@@ -64,6 +66,7 @@ test_that("FIML recovers Model C parameters (binary and ordered J = 3)", {
 })
 
 test_that("copula families plug into the core roy() estimator", {
+  skip_on_cran()  # slow (> 3 s); runs when NOT_CRAN = "true"
   skip_if_not(exists("roy", mode = "function"))
   expect_true(all(c("clayton", "gumbel", "frank", "t") %in% roy_dependence_families()))
   set.seed(3)
@@ -78,6 +81,7 @@ test_that("copula families plug into the core roy() estimator", {
 })
 
 test_that("multistart rejects an irregular boundary maximum (Frank on Clayton data)", {
+  skip_on_cran()  # slow (> 3 s); runs when NOT_CRAN = "true"
   # Clayton DGP, (tau0, tau1) = (-0.3, 0.7). From the flipped-tau start the Frank
   # likelihood climbs to tau1 -> 1 with a non-PD Hessian and a spuriously high
   # log-likelihood; roy() must return the regular maximum instead.
@@ -93,6 +97,7 @@ test_that("multistart rejects an irregular boundary maximum (Frank on Clayton da
 })
 
 test_that("roy_copula_fit rejects an edge start and keeps the best regular maximum", {
+  skip_on_cran()  # slow (> 3 s); runs when NOT_CRAN = "true"
   set.seed(1)
   d <- roy_copula_sim(3000, beta = list(c(0.5, 0.3), c(1, 0.8)), gamma = c(0.2, 0.3, 0.7, 0.7),
                       sigma = c(0.8, 1), tau = c(-0.3, 0.7), family = "clayton")

@@ -11,8 +11,15 @@ copula_hfunc2(u, v, cp)
 
 \item{v}{selection uniform(s)}
 
-\item{cp}{copula parameter list from [copula_par()]}
+\item{cp}{copula parameter list from \code{\link[=copula_par]{copula_par()}}}
+}
+\value{
+A numeric vector of conditional probabilities \eqn{P(U \le u \mid V = v)}.
 }
 \description{
 Conditional copula CDF of u given v: dC(u, v)/dv (handles rotation)
+}
+\examples{
+cp <- copula_par("gumbel", tau = 0.5)
+copula_hfunc2(c(0.2, 0.5, 0.8), v = 0.4, cp = cp)
 }

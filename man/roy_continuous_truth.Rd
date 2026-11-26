@@ -22,10 +22,10 @@ roy_continuous_truth(
 \arguments{
 \item{beta_x}{outcome coefficients on (1, x1)}
 
-\item{beta_a}{dose coefficients on (a, a^2); `beta_a[2] < 0` gives
+\item{beta_a}{dose coefficients on (a, a^2); \code{beta_a[2] < 0} gives
 diminishing returns}
 
-\item{alpha}{coefficients of `log sigma(a)` on (1, a)}
+\item{alpha}{coefficients of \verb{log sigma(a)} on (1, a)}
 
 \item{gamma}{selection coefficients on (1, x1, z1, z2)}
 
@@ -35,7 +35,7 @@ diminishing returns}
 
 \item{nu}{t-copula degrees of freedom}
 
-\item{link}{`"exp"` or `"tanh"`}
+\item{link}{\code{"exp"} or \code{"tanh"}}
 
 \item{covariates}{data.frame with x1, z1, z2 over which to average}
 
@@ -45,8 +45,17 @@ diminishing returns}
 
 \item{grid}{intensity grid for the dose-response function}
 }
+\value{
+A data frame with columns \code{estimand} (\code{dose_response}, \code{TT}, \code{ATE}, \code{TUT}), \code{a} and \code{truth}.
+}
 \description{
-Evaluates the estimands of [roy_continuous_effects()] at known parameters
-of the [roy_continuous_sim()] design (dose `~ a + I(a^2)`, scale `~ a`),
+Evaluates the estimands of \code{\link[=roy_continuous_effects]{roy_continuous_effects()}} at known parameters
+of the \code{\link[=roy_continuous_sim]{roy_continuous_sim()}} design (dose \code{~ a + I(a^2)}, scale \code{~ a}),
 for Monte Carlo studies.
+}
+\examples{
+set.seed(1)
+cov <- data.frame(x1 = rnorm(2000), z1 = rnorm(2000), z2 = rbinom(2000, 1, 0.5))
+tr <- roy_continuous_truth(tau = 0.4, covariates = cov, a = 0.5)
+str(tr, max.level = 1)
 }

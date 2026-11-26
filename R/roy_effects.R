@@ -71,6 +71,11 @@
 #' @param newdata Optional data frame (defaults to the estimation sample).
 #' @param coef_list Internal: coefficient list to use instead of `fit$coef`.
 #' @return Numeric vector.
+#' @examples
+#' dat <- roy_sim_A(n = 1500, seed = 1)
+#' fit <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+#' head(roy_potential(fit, regime = 1))           # E[Y1 | X]
+#' head(roy_potential(fit, regime = 1, given = 0)) # E[Y1 | X, Z, D = 0]
 #' @export
 roy_potential <- function(fit, regime, given = NULL, newdata = NULL, coef_list = NULL) {
   dm <- .design_new(fit$spec, newdata)
@@ -120,6 +125,10 @@ predict.roy_fit <- function(object, newdata = NULL, type = c("potential", "obser
 #' @param se Compute standard errors?
 #' @return A data frame with columns `contrast`, `population`, `estimate`,
 #'   `se`.
+#' @examples
+#' dat <- roy_sim_A(n = 1500, seed = 1)
+#' fit <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+#' roy_effects(fit)
 #' @export
 roy_effects <- function(fit, se = TRUE) {
   spec <- fit$spec; J <- spec$J; d <- spec$d

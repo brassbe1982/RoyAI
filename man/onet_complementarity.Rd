@@ -7,13 +7,13 @@
 onet_complementarity(work_context, job_zones)
 }
 \arguments{
-\item{work_context}{Data frame read from O*NET `work_context.csv`.}
+\item{work_context}{Data frame read from O*NET \code{work_context.csv}.}
 
-\item{job_zones}{Data frame read from O*NET `job_zones.csv`.}
+\item{job_zones}{Data frame read from O*NET \code{job_zones.csv}.}
 }
 \value{
-Data frame with `soc` (6-digit, "XX-XXXX"), the six components and
-  `complementarity`.
+Data frame with \code{soc} (6-digit, "XX-XXXX"), the six components and
+\code{complementarity}.
 }
 \description{
 Builds an occupation-level complementarity score in the spirit of
@@ -21,9 +21,27 @@ Pizzinelli, Panton, Mendes Tavares, Cazzaniga and Li (2023, IMF Working
 Paper 23/216): occupations whose tasks involve communication, responsibility
 for others, physical presence, critical decisions, unstructured work and
 high skill requirements are treated as shielded by, and complementary to,
-AI. Each O*NET work-context item (scale "CX", 1-5) and the Job Zone (1-5)
-are rescaled to \[0, 1\]; items are averaged within six components and the
-score is the mean of the components. This is an **approximation** of the
+AI. Each O\emph{NET work-context item (scale "CX", 1-5) and the Job Zone (1-5)
+are rescaled to [0, 1]; items are averaged within six components and the
+score is the mean of the components. This is an \strong{approximation} of the
 published index: the item list follows the paper's components as closely as
-O*NET 31.0 allows, and routine items enter reversed.
+O}NET 31.0 allows, and routine items enter reversed.
+}
+\examples{
+items <- c("Face-to-Face Discussions with Individuals and Within Teams",
+  "Public Speaking", "Health and Safety of Other Workers",
+  "Work Outcomes and Results of Other Workers",
+  "Outdoors, Exposed to All Weather Conditions", "Physical Proximity",
+  "Consequence of Error", "Freedom to Make Decisions",
+  "Frequency of Decision Making", "Determine Tasks, Priorities and Goals",
+  "Degree of Automation", "Importance of Repeating Same Tasks")
+g <- expand.grid(code = c("11-1011.00", "43-9021.00"), item = items,
+                 stringsAsFactors = FALSE)
+set.seed(1)
+work_context <- data.frame(`O*NET-SOC Code` = g$code, `Element Name` = g$item,
+                           `Scale ID` = "CX", `Data Value` = runif(nrow(g), 1, 5),
+                           check.names = FALSE)
+job_zones <- data.frame(`O*NET-SOC Code` = c("11-1011.00", "43-9021.00"),
+                        `Job Zone` = c(5, 2), check.names = FALSE)
+onet_complementarity(work_context, job_zones)
 }

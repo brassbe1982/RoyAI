@@ -38,22 +38,27 @@ roy_sim_A(
 \item{seed}{Optional random seed.}
 }
 \value{
-A data frame with `y`, `d`, `x1`, `x2`, `z`, the latent `y0`,
-  `y1`, and attribute `"truth"` holding the true parameter vector named as
-  in `coef(roy(...))`.
+A data frame with \code{y}, \code{d}, \code{x1}, \code{x2}, \code{z}, the latent \code{y0},
+\code{y1}, and attribute \code{"truth"} holding the true parameter vector named as
+in \code{coef(roy(...))}.
 }
 \description{
-Covariates: `x1 ~ N(0,1)`, `x2 ~ Bernoulli(0.5)` and an excluded
-instrument `z ~ N(0,1)` (e.g. exogenous variation in AI access cost).
+Covariates: \code{x1 ~ N(0,1)}, \code{x2 ~ Bernoulli(0.5)} and an excluded
+instrument \code{z ~ N(0,1)} (e.g. exogenous variation in AI access cost).
 \eqn{D = 1(\gamma_0 + \gamma_1 x_1 + \gamma_2 x_2 + \gamma_3 z + U_D > 0)},
 \eqn{Y_s = \beta_{s0} + \beta_{s1} x_1 + \beta_{s2} x_2 + U_s}.
 }
 \details{
 With the Gaussian family \eqn{(U_0, U_1, U_D)} is trivariate normal with
-correlations `rho0`, `rho1`, `rho01`. With another registered family the
+correlations \code{rho0}, \code{rho1}, \code{rho01}. With another registered family the
 draws follow a C-vine rooted at \eqn{U_D}: each \eqn{U_s} is drawn from
 the family's conditional distribution given \eqn{U_D} with parameter
-`theta0` / `theta1`, and \eqn{U_0 \perp U_1 \mid U_D}. The vine draw
+\code{theta0} / \code{theta1}, and \eqn{U_0 \perp U_1 \mid U_D}. The vine draw
 assumes an exchangeable copula (true for Gaussian, Clayton, Frank, Gumbel
 and Student-t); rotated families should supply their own simulator.
+}
+\examples{
+dat <- roy_sim_A(n = 1000, seed = 1)
+head(dat)
+attr(dat, "truth")
 }

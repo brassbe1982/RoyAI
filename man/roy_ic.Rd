@@ -7,12 +7,18 @@
 roy_ic(...)
 }
 \arguments{
-\item{...}{Fitted `roy_fit` objects (ML), optionally named.}
+\item{...}{Fitted \code{roy_fit} objects (ML), optionally named.}
 }
 \value{
 A data frame with log-likelihood, number of parameters, AIC and
-  BIC, sorted by AIC.
+BIC, sorted by AIC.
 }
 \description{
 Information criteria for competing Roy models
+}
+\examples{
+dat <- roy_sim_A(n = 1500, seed = 1)
+f1 <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+f0 <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat, dependence = "independence")
+roy_ic(f0, f1)
 }

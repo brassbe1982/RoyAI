@@ -10,6 +10,7 @@ test_that("Model B two-step recovers outcome equations", {
 })
 
 test_that("Model B effects and diagnostics", {
+  skip_on_cran()  # slow (> 3 s); runs when NOT_CRAN = "true"
   f <- roy(y ~ x1 + x2, s ~ x1 + x2 + z1 + z2, data = dat)
   e <- roy_effects(f)
   expect_equal(nrow(e), 12)
@@ -23,6 +24,7 @@ test_that("Model B effects and diagnostics", {
 })
 
 test_that("Lee correction fits and gives NA counterfactuals", {
+  skip_on_cran()  # slow (> 3 s); runs when NOT_CRAN = "true"
   f <- roy(y ~ x1 + x2, s ~ x1 + x2 + z1 + z2, data = dat, correction = "lee")
   expect_true(all(is.na(roy_potential(f, 1, 0))))
   expect_true(all(is.finite(roy_potential(f, 1, 1))))

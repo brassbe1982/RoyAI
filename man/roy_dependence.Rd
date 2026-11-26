@@ -17,30 +17,37 @@ roy_dependence(
 )
 }
 \arguments{
-\item{name}{Family name, e.g. `"gaussian"`.}
+\item{name}{Family name, e.g. \code{"gaussian"}.}
 
-\item{h}{Function `h(v, u, theta)` returning \eqn{P(V \le v \mid U = u)}
-for vectors of uniforms `u`, `v` and a parameter vector `theta`.}
+\item{h}{Function \code{h(v, u, theta)} returning \eqn{P(V \le v \mid U = u)}
+for vectors of uniforms \code{u}, \code{v} and a parameter vector \code{theta}.}
 
 \item{npar}{Number of dependence parameters per outcome-selection pair.}
 
-\item{linkinv}{Map from unconstrained real vector `eta` to `theta`.}
+\item{linkinv}{Map from unconstrained real vector \code{eta} to \code{theta}.}
 
-\item{link}{Inverse of `linkinv`.}
+\item{link}{Inverse of \code{linkinv}.}
 
-\item{start}{Default starting value of `theta`.}
+\item{start}{Default starting value of \code{theta}.}
 
-\item{tau}{Optional function `tau(theta)` giving Kendall's tau, used for
+\item{tau}{Optional function \code{tau(theta)} giving Kendall's tau, used for
 reporting and for comparing families on a common scale.}
 
 \item{cond_mean}{Optional closed form for \eqn{E[U_s \mid U_D > c]}; when
-absent the core integrates numerically (see [roy_potential()]).}
+absent the core integrates numerically (see \code{\link[=roy_potential]{roy_potential()}}).}
 
-\item{par_names}{Names of the elements of `theta`.}
+\item{par_names}{Names of the elements of \code{theta}.}
 }
 \value{
-An object of class `roy_dependence`.
+An object of class \code{roy_dependence}.
 }
 \description{
 Construct a dependence family
+}
+\examples{
+# a copy of the Gaussian family under a new name, built from its pieces
+g <- roy_dep_gaussian()
+g2 <- roy_dependence("gaussian_copy", h = g$h, npar = 1, linkinv = g$linkinv,
+                     link = g$link, start = g$start, tau = g$tau)
+g2
 }

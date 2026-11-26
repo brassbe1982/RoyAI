@@ -21,4 +21,6 @@
 #' (registered for [roy()] at load time by `roy_copula_register()`).
 #' @name roy_copula_families
 #' @format A character vector.
+#' @examples
+#' roy_copula_families
 NULL

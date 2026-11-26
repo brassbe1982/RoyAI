@@ -7,13 +7,19 @@
 roy_lrtest(restricted, full)
 }
 \arguments{
-\item{restricted, full}{Fitted `roy_fit` objects estimated by ML on the
-same data, with `restricted` nested in `full`.}
+\item{restricted, full}{Fitted \code{roy_fit} objects estimated by ML on the
+same data, with \code{restricted} nested in \code{full}.}
 }
 \value{
-A list of class `htest`.
+A list of class \code{htest}.
 }
 \description{
 Typical use: the classical or extended Roy model against the generalized
 Roy model, or the independence family against the Gaussian family.
+}
+\examples{
+dat <- roy_sim_A(n = 1500, seed = 1)
+f1 <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat)
+f0 <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat, dependence = "independence")
+roy_lrtest(f0, f1)
 }

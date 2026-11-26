@@ -17,11 +17,11 @@ roy_mc(
 \arguments{
 \item{sim}{Function of no arguments returning a data set.}
 
-\item{fit}{Function taking a data set and returning a `roy_fit`.}
+\item{fit}{Function taking a data set and returning a \code{roy_fit}.}
 
 \item{R}{Number of replications.}
 
-\item{truth}{Named true parameter vector; defaults to `attr(sim(), "truth")`.}
+\item{truth}{Named true parameter vector; defaults to \code{attr(sim(), "truth")}.}
 
 \item{level}{Confidence level for coverage.}
 
@@ -30,13 +30,13 @@ roy_mc(
 \item{progress}{Print a progress dot every 10 replications?}
 }
 \value{
-An object of class `roy_mc` with `summary` (data frame), `estimates`
-  and `se` (R x p matrices) and `failures`.
+An object of class \code{roy_mc} with \code{summary} (data frame), \code{estimates}
+and \code{se} (R x p matrices) and \code{failures}.
 }
 \description{
-Repeats `sim()` and `fit()` `R` times and summarizes bias, standard
+Repeats \code{sim()} and \code{fit()} \code{R} times and summarizes bias, standard
 deviation, RMSE, mean estimated standard error and coverage of nominal
-`level` Wald intervals for every parameter present in `truth`.
+\code{level} Wald intervals for every parameter present in \code{truth}.
 }
 \examples{
 \donttest{

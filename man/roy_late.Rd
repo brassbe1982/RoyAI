@@ -17,10 +17,20 @@ roy_late(fit, instrument, from = 0, to = 1, data = NULL, se = TRUE)
 
 \item{se}{compute delta-method standard errors}
 }
+\value{
+A data frame with columns \code{parameter} (the LATE and the complier share), \code{estimate} and, if \code{se = TRUE}, \code{se}.
+}
 \description{
-Compares the propensity score under `data_from` and `data_to` (same
+Compares the propensity score under \code{data_from} and \code{data_to} (same
 people, instrument changed, e.g. AI access z2 from 0 to 1).  The LATE is
 the average gain among compliers,
-  LATE = sum_i [ (P1_i - P0_i) x_i' dbeta + G(P1_i) - G(P0_i) ] / sum_i (P1_i - P0_i)
-with G(P) = E[(U_1 - U_0) 1{U_S <= P}].
+\verb{LATE = sum_i [(P1_i - P0_i) x_i' dbeta + G(P1_i) - G(P0_i)] / sum_i (P1_i - P0_i)}
+with \verb{G(P) = E[(U_1 - U_0) 1\{U_S <= P\}]}.
+}
+\examples{
+set.seed(2)
+d <- roy_copula_sim(1500, list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6),
+                    c(0.8, 1), c(-0.4, 0.5), "clayton")
+fit <- roy_copula_fit(y ~ x1, s ~ x1 + z1 + z2, d, family = "clayton")
+roy_late(fit, "z2", data = d)
 }

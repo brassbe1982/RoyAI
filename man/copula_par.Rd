@@ -19,3 +19,8 @@ list(family, theta, rot, nu, tau)
 \description{
 Map Kendall's tau to native copula parameters
 }
+\examples{
+cp <- copula_par("clayton", tau = 0.4)
+str(cp)
+copula_par("t", tau = -0.2, nu = 5)$theta
+}

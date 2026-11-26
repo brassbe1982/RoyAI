@@ -32,6 +32,12 @@
 #'   absent the core integrates numerically (see [roy_potential()]).
 #' @param par_names Names of the elements of `theta`.
 #' @return An object of class `roy_dependence`.
+#' @examples
+#' # a copy of the Gaussian family under a new name, built from its pieces
+#' g <- roy_dep_gaussian()
+#' g2 <- roy_dependence("gaussian_copy", h = g$h, npar = 1, linkinv = g$linkinv,
+#'                      link = g$link, start = g$start, tau = g$tau)
+#' g2
 #' @export
 roy_dependence <- function(name, h, npar, linkinv, link, start,
                            tau = NULL, cond_mean = NULL,
@@ -73,6 +79,12 @@ roy_register_dependence <- function(family, overwrite = FALSE) {
 }
 
 #' @rdname roy_register_dependence
+#' @examples
+#' g <- roy_dep_gaussian()
+#' g$name <- "gaussian_copy"
+#' roy_register_dependence(g, overwrite = TRUE)
+#' "gaussian_copy" %in% roy_dependence_families()
+#' roy_get_dependence("gaussian_copy")
 #' @export
 roy_get_dependence <- function(name) {
   if (inherits(name, "roy_dependence")) return(name)
@@ -92,6 +104,10 @@ roy_dependence_families <- function() names(.roy_registry$dependence)
 #' With Gaussian margins this reproduces the textbook normal endogenous
 #' switching likelihood exactly; `theta` is the correlation \eqn{\rho}.
 #' @return A [roy_dependence()] object.
+#' @examples
+#' g <- roy_dep_gaussian()
+#' g
+#' g$h(0.5, 0.3, 0.4)
 #' @export
 roy_dep_gaussian <- function() {
   roy_dependence(
@@ -117,6 +133,8 @@ roy_dep_gaussian <- function() {
 #' Useful as the null model in diagnostics: with independence, selection is
 #' on observables only and OLS within each regime is consistent.
 #' @return A [roy_dependence()] object.
+#' @examples
+#' roy_dep_independence()
 #' @export
 roy_dep_independence <- function() {
   roy_dependence(
@@ -158,5 +176,15 @@ roy_register_method <- function(model, method, fitter, overwrite = FALSE) {
 }
 
 #' @rdname roy_register_method
+#' @examples
+#' # a toy method that refits the specification with the built-in two-step
+#' # estimator; a real plug-in would implement its own estimator here
+#' my_twostep <- function(spec, ...)
+#'   roy(spec$outcome, spec$selection, data = spec$data, method = "twostep")
+#' roy_register_method("A", "my_twostep", my_twostep, overwrite = TRUE)
+#' roy_methods()
+#' dat <- roy_sim_A(n = 800, seed = 1)
+#' fit <- roy(y ~ x1 + x2, d ~ x1 + x2 + z, data = dat, method = "my_twostep")
+#' coef(fit)[1:3]
 #' @export
 roy_methods <- function() names(.roy_registry$methods)

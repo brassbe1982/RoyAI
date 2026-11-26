@@ -13,15 +13,25 @@ roy_copula_select(
 )
 }
 \arguments{
-\item{outcome, selection, data}{as in [roy_copula_fit()]}
+\item{outcome, selection, data}{as in \code{\link[=roy_copula_fit]{roy_copula_fit()}}}
 
 \item{families}{copula families to compare}
 
-\item{...}{passed to [roy_copula_fit()]}
+\item{...}{passed to \code{\link[=roy_copula_fit]{roy_copula_fit()}}}
 }
 \value{
 list(table, fits, best)
 }
 \description{
 Fit every copula family and rank them by AIC/BIC
+}
+\examples{
+\donttest{
+set.seed(2)
+d <- roy_copula_sim(1500, list(c(0.5, 0.3), c(1, 0.5)), c(0.2, 0.3, 0.8, 0.6),
+                    c(0.8, 1), c(-0.4, 0.5), "clayton")
+sel <- roy_copula_select(y ~ x1, s ~ x1 + z1 + z2, d,
+                         families = c("gaussian", "clayton"))
+sel
+}
 }

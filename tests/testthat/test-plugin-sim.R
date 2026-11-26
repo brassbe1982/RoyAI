@@ -1,4 +1,5 @@
 test_that("a new dependence family plugs into ML, simulation and effects", {
+  skip_on_cran()  # slow (> 3 s); runs when NOT_CRAN = "true"
   # Clayton copula (exchangeable), theta > 0
   clayton <- roy_dependence(
     name = "clayton_test", npar = 1L, par_names = "theta",

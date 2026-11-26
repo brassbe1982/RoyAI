@@ -7,18 +7,24 @@
 soc18_to_soc10(x, xwalk, measures)
 }
 \arguments{
-\item{x}{Data frame with `soc` (SOC 2018, "XX-XXXX") and measure columns.}
+\item{x}{Data frame with \code{soc} (SOC 2018, "XX-XXXX") and measure columns.}
 
-\item{xwalk}{Data frame with columns `soc2010` and `soc2018`.}
+\item{xwalk}{Data frame with columns \code{soc2010} and \code{soc2018}.}
 
 \item{measures}{Measure columns to convert.}
 }
 \value{
-Data frame with `soc` (SOC 2010) and the averaged measures.
+Data frame with \code{soc} (SOC 2010) and the averaged measures.
 }
 \description{
-O*NET 31.0 and the GPT-exposure ratings use O*NET-SOC 2019 codes (built on
+O\emph{NET 31.0 and the GPT-exposure ratings use O}NET-SOC 2019 codes (built on
 SOC 2018), while the AIOE and the ISCO crosswalk use SOC 2010. This
 averages SOC 2018 measures onto SOC 2010 codes with the BLS
-`soc_2010_to_2018_crosswalk.xlsx`.
+\code{soc_2010_to_2018_crosswalk.xlsx}.
+}
+\examples{
+xw <- data.frame(soc2010 = c("15-1131", "15-1131", "43-9021"),
+                 soc2018 = c("15-1251", "15-1252", "43-9021"))
+x <- data.frame(soc = c("15-1251", "15-1252", "43-9021"), gpt = c(0.6, 0.8, 0.9))
+soc18_to_soc10(x, xw, "gpt")
 }
