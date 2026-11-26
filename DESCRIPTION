@@ -16,7 +16,7 @@ Description: Estimation, simulation and diagnostics for generalized Roy (1951)
     Roy model with three production arrangements, estimated by
     multinomial-logit selection correction (Dubin-McFadden as modified by
     Bourguignon, Fournier and Gurgand (2007)
-    <doi:10.1111/j.1467-6419.2007.00466.x>, or Lee (1983)
+    <doi:10.1111/j.1467-6419.2007.00503.x>, or Lee (1983)
     <doi:10.2307/1912003>). Model C is the copula generalized Roy model.
     Model D is a copula Roy model for continuous AI-use intensity with a mass
     of non-users, estimated by maximum likelihood. Model E is a dynamic Roy
