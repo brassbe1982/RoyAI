@@ -1,3 +1,11 @@
+## Resubmission
+
+This is a resubmission of RoyAI 0.3.0. In the first submission the DOI for
+Bourguignon, Fournier and Gurgand (2007) was wrong and returned 404. It is now
+corrected to <doi:10.1111/j.1467-6419.2007.00503.x> (Journal of Economic
+Surveys 21(1), 174-205) in DESCRIPTION and in man/RoyAI-package.Rd. All
+other DOIs were checked with `urlchecker::url_check()`. Nothing else changed.
+
 ## Submission
 
 This is a first submission of RoyAI (version 0.3.0).
